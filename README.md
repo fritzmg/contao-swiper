@@ -41,3 +41,7 @@ Currently you have to add
 ]
 ```
 to your root `composer.json`. You can change the `3.4.2` version numbers to something higher whenever necessary or possible.
+
+## Usage
+
+jQuery needs to be enabled in your page layout.
