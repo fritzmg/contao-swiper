@@ -97,9 +97,9 @@ class WrapperStart extends ContentElement
 		$objTemplate->parameters = $arrParams;
 
 		// add CSS and JS
-		$GLOBALS['TL_CSS'][] = 'assets/swiper/dist/css/swiper.min.css';
-		$GLOBALS['TL_CSS'][] = 'bundles/contaoswiper/swiper.css';
-		$GLOBALS['TL_JAVASCRIPT'][] = 'assets/swiper/dist/js/swiper.jquery.min.js';
+		$GLOBALS['TL_CSS'][] = 'bundles/contaoswiper/swiper.min.css';
+		$GLOBALS['TL_CSS'][] = 'bundles/contaoswiper/element.css';
+		$GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaoswiper/swiper.jquery.min.js';
 		$GLOBALS['TL_BODY'][] = $objTemplate->parse();
 	}
 }
