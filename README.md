@@ -26,7 +26,7 @@ Currently you have to add
             "extra": {
                 "component": {
                     "scripts": [
-                        "dist/js/swiper.min.js"
+                        "dist/js/swiper.jquery.min.js"
                     ],
                     "styles": [
                         "dist/css/swiper.min.css"
