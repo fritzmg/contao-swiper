@@ -10,7 +10,7 @@
  */
 
 
-$GLOBALS['TL_DCA']['tl_content']['palettes']['swiperStart'] = '{type_legend},type,headline;{slider_legend},sliderDelay,sliderSpeed,sliderSlidesPerView,sliderSpaceBetween,sliderEffect,sliderWrapperClass,sliderContinuous,sliderButtons,sliderPagination,sliderBreakpoints;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID;{invisible_legend:hide},invisible,start,stop';
+$GLOBALS['TL_DCA']['tl_content']['palettes']['swiperStart'] = '{type_legend},type,headline;{slider_legend},sliderDelay,sliderSpeed,sliderSlidesPerView,sliderSpaceBetween,sliderEffect,sliderWrapperClass,sliderContinuous,sliderButtons,sliderPagination,sliderPaginationType,sliderBreakpoints;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['swiperStop'] = $GLOBALS['TL_DCA']['tl_content']['palettes']['sliderStop'];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['sliderDelay']['eval']['rgxp'] = 'natural';
@@ -78,11 +78,26 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['sliderButtons'] = array
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['sliderPagination'] = array
 (
-	'label' => array('Nummerierung','Zeigt klickbare Punkte für die einzelnen Slides an.'),
+	'label' => array('Nummerierung','Zeigt eine klickbare Nummerierung für die einzelnen Slides an.'),
 	'exclude' => true,
 	'inputType' => 'checkbox',
-	'eval' => array('tl_class'=>'w50'),
+	'eval' => array('tl_class'=>'w50 m12'),
 	'sql' => "char(1) NOT NULL default ''"
+);
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['sliderPaginationType'] = array
+(
+    'label' => array('Art der Nummerierung','Die Art der Nummerierung.'),
+    'exclude' => true,
+    'default' => 'bullets',
+    'inputType' => 'select',
+    'options' => array(
+        'bullets' => 'Punkte',
+        'fraction' => 'Bruchzahl',
+        'progress' => 'Fortschritt'
+    ),
+    'eval' => array('tl_class'=>'w50'),
+    'sql' => "varchar(16) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['sliderBreakpoints'] = array

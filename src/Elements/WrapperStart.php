@@ -73,6 +73,7 @@ class WrapperStart extends ContentElement
 		  $arrParams['paginationClickable'] = true;
 		  $this->class .= ' has-pagination';
 		}
+		if ($this->sliderPaginationType) $arrParams['paginationType'] = $this->sliderPaginationType;
 		if ($arrBreakpoints = deserialize($this->sliderBreakpoints, true))
 		{
 			$arrParams['breakpoints'] = array();
