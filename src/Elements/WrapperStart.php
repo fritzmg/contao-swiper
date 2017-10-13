@@ -53,27 +53,34 @@ class WrapperStart extends ContentElement
 		// prepare parameters for swiper
 		$arrParams = array();
 
+		// additional css classes
+		$arrClasses = explode(' ', $this->cssID[1]);
+
 		// process parameters
 		if ($this->sliderDelay) $arrParams['autoplay'] = (int)$this->sliderDelay;
 		if ($this->sliderSpeed) $arrParams['speed'] = (int)$this->sliderSpeed;
 		if ($this->sliderSlidesPerView && (is_numeric($this->sliderSlidesPerView) || $this->sliderSlidesPerView == 'auto'))
-		  $arrParams['slidesPerView'] = is_numeric($this->sliderSlidesPerView) ? (int)$this->sliderSlidesPerView : $this->sliderSlidesPerView;
+			$arrParams['slidesPerView'] = is_numeric($this->sliderSlidesPerView) ? (int)$this->sliderSlidesPerView : $this->sliderSlidesPerView;
 		if ($this->sliderSpaceBetween) $arrParams['spaceBetween'] = (int)$this->sliderSpaceBetween;
 		if ($this->sliderEffect) $arrParams['effect'] = $this->sliderEffect;
 		if ($this->sliderContinuous) $arrParams['loop'] = true;
 		if ($this->sliderButtons)
 		{
-		  $arrParams['nextButton'] = '#swiper-'.$this->id.' .swiper-button-next';
-		  $arrParams['prevButton'] = '#swiper-'.$this->id.' .swiper-button-prev';
-		  $this->class .= ' has-buttons';
+			$arrParams['nextButton'] = '#swiper-'.$this->id.' .swiper-button-next';
+			$arrParams['prevButton'] = '#swiper-'.$this->id.' .swiper-button-prev';
+			$arrClasses[] = 'has-buttons';
 		}
 		if ($this->sliderPagination)
 		{
-		  $arrParams['pagination'] = '#swiper-'.$this->id.' .swiper-pagination';
-		  $arrParams['paginationClickable'] = true;
-		  $this->class .= ' has-pagination';
+			$arrParams['pagination'] = '#swiper-'.$this->id.' .swiper-pagination';
+			$arrParams['paginationClickable'] = true;
+			$arrClasses[] = 'has-pagination';
 		}
-		if ($this->sliderPaginationType) $arrParams['paginationType'] = $this->sliderPaginationType;
+		if ($this->sliderPaginationType)
+		{
+			$arrParams['paginationType'] = $this->sliderPaginationType;
+			$arrClasses[] = 'pagination-'.$this->sliderPaginationType;
+		}
 		if ($arrBreakpoints = deserialize($this->sliderBreakpoints, true))
 		{
 			$arrParams['breakpoints'] = array();
@@ -102,5 +109,10 @@ class WrapperStart extends ContentElement
 		$GLOBALS['TL_CSS'][] = 'bundles/contaoswiper/element.css';
 		$GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaoswiper/swiper.jquery.min.js';
 		$GLOBALS['TL_BODY'][] = $objTemplate->parse();
+
+		// set classes
+		$arrCssID = $this->cssID;
+		$arrCssID[1] = implode(' ', $arrClasses);
+		$this->cssID = $arrCssID;
 	}
 }
