@@ -7,6 +7,6 @@
       $('<?= $this->container ?> .<?= $this->wrapperClass ?>').addClass('swiper-wrapper');
     <?php endif; ?>
     $('<?= $this->container ?> .<?= $this->wrapperClass ?: 'swiper-wrapper' ?> > *').addClass('swiper-slide');
-    var slider = new Swiper('<?= $this->container ?>', <?= json_encode($this->parameters) ?>);
+    $('<?= $this->container ?>').data('swiper', new Swiper('<?= $this->container ?>', <?= json_encode($this->parameters) ?>));
   });
 </script>
