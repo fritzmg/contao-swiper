@@ -88,9 +88,9 @@ class WrapperStart extends ContentElement
 			{
 				$arrSettings = array();
 				if (is_numeric($arrBreakpoint['slidesPerView']) || 'auto' == $arrBreakpoint['slidesPerView'])
-					$arrSettings['slidesPerView'] = $arrBreakpoint['slidesPerView'];
+					$arrSettings['slidesPerView'] = is_numeric($arrBreakpoint['slidesPerView']) ? (int)$arrBreakpoint['slidesPerView'] : 'auto';
 				if ($arrBreakpoint['spaceBetween'])
-					$arrSettings['spaceBetween'] = $arrBreakpoint['spaceBetween'];
+					$arrSettings['spaceBetween'] = (int)$arrBreakpoint['spaceBetween'];
 				$arrParams['breakpoints'][$arrBreakpoint['breakpoint']] = $arrSettings;
 			}
 		}
