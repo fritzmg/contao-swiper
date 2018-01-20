@@ -11,9 +11,9 @@
 
 namespace ContaoSwiperBundle\Elements;
 
-use Contao\ContentElement;
 use Contao\BackendTemplate;
-use Contao\FrontendTemplate;
+use Contao\ContentElement;
+use Patchwork\Utf8;
 
 
 /**
@@ -31,84 +31,43 @@ class WrapperStart extends ContentElement
 	protected $strTemplate = 'ce_swiperStart';
 
 
+    /**
+     * Display a wildcard in the back end.
+     *
+     * @return string
+     */
+    public function generate()
+    {
+        if (TL_MODE == 'BE')
+        {
+            $objTemplate = new BackendTemplate('be_wildcard');
+            return $objTemplate->parse();
+        }
+
+        return parent::generate();
+    }
+
+
 	/**
 	 * Generate the content element
 	 */
 	protected function compile()
 	{
-		if (TL_MODE == 'BE')
-		{
-			$this->strTemplate = 'be_wildcard';
-
-			/** @var BackendTemplate|object $objTemplate */
-			$objTemplate = new BackendTemplate($this->strTemplate);
-
-			$this->Template = $objTemplate;
-			$this->Template->title = $this->headline;
-		}
-
-		// default effect
-		$this->sliderEffect = $this->sliderEffect ?: 'slide';
-
-		// prepare parameters for swiper
-		$arrParams = array();
-
 		// additional css classes
 		$arrClasses = explode(' ', $this->cssID[1]);
 
-		// process parameters
-		if ($this->sliderDelay) $arrParams['autoplay'] = (int)$this->sliderDelay;
-		if ($this->sliderSpeed) $arrParams['speed'] = (int)$this->sliderSpeed;
-		if ($this->sliderSlidesPerView && (is_numeric($this->sliderSlidesPerView) || $this->sliderSlidesPerView == 'auto'))
-			$arrParams['slidesPerView'] = is_numeric($this->sliderSlidesPerView) ? (int)$this->sliderSlidesPerView : $this->sliderSlidesPerView;
-		if ($this->sliderSpaceBetween) $arrParams['spaceBetween'] = (int)$this->sliderSpaceBetween;
-		if ($this->sliderEffect) $arrParams['effect'] = $this->sliderEffect;
-		if ($this->sliderContinuous) $arrParams['loop'] = true;
 		if ($this->sliderButtons)
 		{
-			$arrParams['nextButton'] = '#swiper-'.$this->id.' .swiper-button-next';
-			$arrParams['prevButton'] = '#swiper-'.$this->id.' .swiper-button-prev';
 			$arrClasses[] = 'has-buttons';
 		}
 		if ($this->sliderPagination)
 		{
-			$arrParams['pagination'] = '#swiper-'.$this->id.' .swiper-pagination';
-			$arrParams['paginationClickable'] = true;
 			$arrClasses[] = 'has-pagination';
 		}
 		if ($this->sliderPaginationType)
 		{
-			$arrParams['paginationType'] = $this->sliderPaginationType;
 			$arrClasses[] = 'pagination-'.$this->sliderPaginationType;
 		}
-		if ($arrBreakpoints = deserialize($this->sliderBreakpoints, true))
-		{
-			$arrParams['breakpoints'] = array();
-			foreach ($arrBreakpoints as $arrBreakpoint)
-			{
-				$arrSettings = array();
-				if (is_numeric($arrBreakpoint['slidesPerView']) || 'auto' == $arrBreakpoint['slidesPerView'])
-					$arrSettings['slidesPerView'] = is_numeric($arrBreakpoint['slidesPerView']) ? (int)$arrBreakpoint['slidesPerView'] : 'auto';
-				if ($arrBreakpoint['spaceBetween'])
-					$arrSettings['spaceBetween'] = (int)$arrBreakpoint['spaceBetween'];
-				$arrParams['breakpoints'][$arrBreakpoint['breakpoint']] = $arrSettings;
-			}
-		}
-
-		// JavaScript template
-		$objTemplate = new FrontendTemplate('jquery_swiper');
-		$objTemplate->container = '#swiper-'.$this->id.' .swiper-container';
-		$objTemplate->assignSlides = $this->sliderSlideClass ? false : true;
-		$objTemplate->createWrapper = $this->sliderWrapperClass ? false : true;
-		$objTemplate->wrapperClass = $this->sliderWrapperClass;
-		$objTemplate->slideClass = $this->sliderSlideClass;
-		$objTemplate->parameters = $arrParams;
-
-		// add CSS and JS
-		$GLOBALS['TL_CSS'][] = 'bundles/contaoswiper/swiper.min.css';
-		$GLOBALS['TL_CSS'][] = 'bundles/contaoswiper/element.css';
-		$GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaoswiper/swiper.jquery.min.js';
-		$GLOBALS['TL_BODY'][] = $objTemplate->parse();
 
 		// set classes
 		$arrCssID = $this->cssID;

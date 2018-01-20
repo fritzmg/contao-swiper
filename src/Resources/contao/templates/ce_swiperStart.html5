@@ -1,11 +1,4 @@
 
 <div class="<?= $this->class ?> block"<?= $this->cssID ?><?php if ($this->style): ?> style="<?= $this->style ?>"<?php endif; ?>>
   <div id="swiper-<?= $this->id ?>" class="swiper-init-container">
-    <?php if ($this->sliderButtons): ?>
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
-    <?php endif; ?>
     <div class="swiper-container">
-      <?php if ($this->sliderPagination): ?>
-        <div class="swiper-pagination"></div>
-      <?php endif; ?>
