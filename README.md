@@ -5,8 +5,8 @@
 Contao Swiper
 =====================
 
-Contao 4+ bundle to integrate Swiper.js
+Contao 4+ bundle to integrate [Swiper.js](http://idangero.us/swiper/).
 
 ## Usage
 
-__jQuery__ needs to be enabled in your page layout.
+__jQuery__ needs to be enabled in your page layout. This extension replaces the core slider with a Swiper implementation.
