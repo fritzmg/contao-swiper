@@ -23,7 +23,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['sliderContinuous']['eval']['tl_class
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['sliderSlidesPerView'] = array
 (
-	'label' => array('Anzahl der sichtbaren Slides','Die Anzahl an einzelnen Slides die pro Sektion sichtbar sein soll (Zahl oder \'auto\').'),
+	'label' => &$GLOBALS['TL_LANG']['tl_content']['sliderSlidesPerView'],
 	'exclude' => true,
 	'default' => 1,
 	'inputType' => 'text',
@@ -33,7 +33,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['sliderSlidesPerView'] = array
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['sliderSpaceBetween'] = array
 (
-	'label' => array('Abstand zwischen den Slides','Abstand zwischen den Slides in Pixel.'),
+	'label' => &$GLOBALS['TL_LANG']['tl_content']['sliderSpaceBetween'],
 	'exclude' => true,
 	'default' => 0,
 	'inputType' => 'text',
@@ -43,7 +43,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['sliderSpaceBetween'] = array
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['sliderEffect'] = array
 (
-	'label' => array('Effekt','Effekt-Art beim Wechsel der Slides.'),
+	'label' => &$GLOBALS['TL_LANG']['tl_content']['sliderEffect'],
 	'exclude' => true,
 	'default' => 'slide',
 	'inputType' => 'select',
@@ -60,7 +60,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['sliderEffect'] = array
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['sliderWrapperClass'] = array
 (
-	'label' => array('Wrapper CSS Klasse','Die optionale CSS Klasse des Wrappers.'),
+	'label' => &$GLOBALS['TL_LANG']['tl_content']['sliderWrapperClass'],
 	'exclude' => true,
 	'inputType' => 'text',
 	'eval' => array('tl_class'=>'w50'),
@@ -69,7 +69,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['sliderWrapperClass'] = array
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['sliderButtons'] = array
 (
-	'label' => array('Steuerschaltflächen','Zeigt Vor- und Zurück-Schaltflächen an.'),
+	'label' => &$GLOBALS['TL_LANG']['tl_content']['sliderButtons'],
 	'exclude' => true,
 	'inputType' => 'checkbox',
 	'eval' => array('tl_class'=>'w50'),
@@ -78,7 +78,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['sliderButtons'] = array
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['sliderPagination'] = array
 (
-	'label' => array('Nummerierung','Zeigt eine klickbare Nummerierung für die einzelnen Slides an.'),
+	'label' => &$GLOBALS['TL_LANG']['tl_content']['sliderPagination'],
 	'exclude' => true,
 	'inputType' => 'checkbox',
 	'eval' => array('tl_class'=>'w50 m12'),
@@ -87,7 +87,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['sliderPagination'] = array
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['sliderPaginationType'] = array
 (
-    'label' => array('Art der Nummerierung','Die Art der Nummerierung.'),
+    'label' => &$GLOBALS['TL_LANG']['tl_content']['sliderPaginationType'],
     'exclude' => true,
     'default' => 'bullets',
     'inputType' => 'select',
@@ -102,7 +102,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['sliderPaginationType'] = array
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['sliderBreakpoints'] = array
 (
-    'label'         => array('Breakpoints', 'Definiert andere Parameter bei spezifischen Viewport Breakpoints.'),
+    'label'         => &$GLOBALS['TL_LANG']['tl_content']['sliderBreakpoints'],
     'exclude'       => true,
     'inputType'     => 'multiColumnWizard',
     'eval'          => array
@@ -112,21 +112,21 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['sliderBreakpoints'] = array
         (
             'breakpoint' => array
             (
-                'label'         => array('Breakpoint', 'Der Breakpoint in Pixel.'),
+                'label'         => &$GLOBALS['TL_LANG']['tl_content']['sliderBreakpointsSettings']['breakpoint'],
                 'exclude'       => true,
                 'inputType'     => 'text',
                 'eval'          => array('rgxp'=>'natural')
             ),
             'slidesPerView' => array
             (
-                'label'         => array('Sichtbare Slides', 'Anzahl der sichtbaren Slides bei diesem Breakpoint.'),
+                'label'         => &$GLOBALS['TL_LANG']['tl_content']['sliderBreakpointsSettings']['slidesPerView'],
                 'exclude'       => true,
                 'inputType'     => 'text',
                 'eval'          => array('maxlength'=>4)
             ),
             'spaceBetween' => array
             (
-                'label'         => array('Abstand', 'Abstand zwischen den Slides bei diesem Breapoint.'),
+                'label'         => &$GLOBALS['TL_LANG']['tl_content']['sliderBreakpointsSettings']['spaceBetween'],
                 'exclude'       => true,
                 'inputType'     => 'text',
                 'eval'          => array('rgxp'=>'natural')

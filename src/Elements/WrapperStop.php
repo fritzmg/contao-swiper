@@ -14,7 +14,6 @@ namespace ContaoSwiperBundle\Elements;
 use Contao\BackendTemplate;
 use Contao\ContentElement;
 use Contao\ContentModel;
-use Patchwork\Utf8;
 
 
 /**
