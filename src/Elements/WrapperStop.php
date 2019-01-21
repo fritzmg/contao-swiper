@@ -86,16 +86,16 @@ class WrapperStop extends ContentElement
 			if ($objContent->sliderSpaceBetween) $arrParams['spaceBetween'] = (int)$objContent->sliderSpaceBetween;
 			if ($objContent->sliderEffect) $arrParams['effect'] = $objContent->sliderEffect;
 			if ($objContent->sliderContinuous) $arrParams['loop'] = true;
-			if ($objContent->sliderButtons)
-			{
-				$arrParams['nextButton'] = '#swiper-'.$objContent->id.' .swiper-button-next';
-				$arrParams['prevButton'] = '#swiper-'.$objContent->id.' .swiper-button-prev';
-			}
-			if ($objContent->sliderPagination)
-			{
-				$arrParams['pagination'] = '#swiper-'.$objContent->id.' .swiper-pagination';
-				$arrParams['paginationClickable'] = true;
-			}
+            if ($objContent->sliderButtons)
+            {
+                // set navigation to true, so it will be enabled
+                $arrParams['navigation'] = true;
+            }
+            if ($objContent->sliderPagination)
+            {
+                // set pagination to true, so it will be enabled
+                $arrParams['pagination'] = true;
+            }
 			if ($objContent->sliderPaginationType)
 			{
 				$arrParams['paginationType'] = $objContent->sliderPaginationType;
@@ -120,14 +120,15 @@ class WrapperStop extends ContentElement
 
 			$this->Template->sliderButtons    = $objContent->sliderButtons;
 			$this->Template->sliderPagination = $objContent->sliderPagination;
-			$this->Template->container        = '#swiper-'.$objContent->id.' .swiper-container';
 			$this->Template->wrapperClass     = $objContent->sliderWrapperClass;
 			$this->Template->parameters       = $arrParams;
+            $this->Template->sliderId         = 'swiper-' . $objContent->id; // unique name for an entry in the sliderConfig-variable
 
 			// add CSS and JS
 			$GLOBALS['TL_CSS'][] = 'bundles/contaoswiper/swiper.min.css';
 			$GLOBALS['TL_CSS'][] = 'bundles/contaoswiper/element.css';
-			$GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaoswiper/swiper.jquery.min.js';
+			$GLOBALS['TL_BODY'][] = 'bundles/contaoswiper/swiper.min.js'; // load swiper
+			$GLOBALS['TL_BODY'][] = 'bundles/contaoswiper/contao-swiper.min.js'; // load custom script to initialize the sliders
 		}
 	}
 }

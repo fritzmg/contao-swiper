@@ -9,18 +9,12 @@
     <?php endif; ?>
   </div>
 
-  <?php if ($this->parameters): ?>
-    <script>
-      (function($) {
-        <?php if (!$this->wrapperClass): ?>
-          $('<?= $this->container ?> > *').wrapAll($('<div class="swiper-wrapper"></div>'));
-        <?php else: ?>
-          $('<?= $this->container ?> .<?= $this->wrapperClass ?>').addClass('swiper-wrapper');
-        <?php endif; ?>
-        $('<?= $this->container ?> .<?= $this->wrapperClass ?: 'swiper-wrapper' ?> > *').addClass('swiper-slide');
-        $('<?= $this->container ?>').data('swiper', new Swiper('<?= $this->container ?>', <?= json_encode($this->parameters) ?>));
-      })(jQuery);
-    </script>
-  <?php endif; ?>
+  <script>
+    // check if there is already a config (slider) on the page
+    if (typeof sliderConfig === 'undefined') {
+        var sliderConfig = {};
+    }
+    sliderConfig['<?= $this->sliderId; ?>'] = {'cssclass': '<?= $this->wrapperClass ?>', 'params': <?= json_encode($this->parameters) ?>};
+  </script>
 
 </div>
