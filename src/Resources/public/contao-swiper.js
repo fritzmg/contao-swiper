@@ -10,11 +10,20 @@
             // adjust html structure
             var slider = document.getElementById(sliderId);
             var sliderElement = slider.querySelector('.swiper-container');
-            sliderElement.innerHTML = '<div class="swiper-wrapper">' + sliderElement.innerHTML + '</div>'; // add the swiper-wrapper element inside the swiper-container
-            var wrapperElement = sliderElement.querySelector('.swiper-wrapper');
+            var wrapperElement;
+            // if there is an extra cssClass, try to select the next element inside the container and check if it has this class
             if (cssClass) {
+                wrapperElement = sliderElement.firstElementChild;
+                // check if there is an element with this class
+                if (!wrapperElement || !wrapperElement.classList.contains(cssClass)) {
+                    throw new Error('element with class "' + cssClass + '" not found!');
+                }
+                wrapperElement.classList.add('swiper-wrapper');
                 // add custom css class
-                wrapperElement.classList.add(cssClass);
+                //wrapperElement.classList.add(cssClass);
+            } else {
+                sliderElement.innerHTML = '<div class="swiper-wrapper">' + sliderElement.innerHTML + '</div>'; // add the swiper-wrapper element inside the swiper-container
+                wrapperElement = sliderElement.querySelector('.swiper-wrapper');
             }
             // get all Elements inside the wrapper
             var slides = wrapperElement.children;
