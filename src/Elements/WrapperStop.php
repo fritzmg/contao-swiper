@@ -86,16 +86,16 @@ class WrapperStop extends ContentElement
 			if ($objContent->sliderSpaceBetween) $arrParams['spaceBetween'] = (int)$objContent->sliderSpaceBetween;
 			if ($objContent->sliderEffect) $arrParams['effect'] = $objContent->sliderEffect;
 			if ($objContent->sliderContinuous) $arrParams['loop'] = true;
-            if ($objContent->sliderButtons)
-            {
-                // set navigation to true, so it will be enabled
-                $arrParams['navigation'] = true;
-            }
-            if ($objContent->sliderPagination)
-            {
-                // set pagination to true, so it will be enabled
-                $arrParams['pagination'] = true;
-            }
+            		if ($objContent->sliderButtons)
+            		{
+                		// set navigation to true, so it will be enabled
+                		$arrParams['navigation'] = true;
+            		}
+            		if ($objContent->sliderPagination)
+            		{
+                		// set pagination to true, so it will be enabled
+                		$arrParams['pagination'] = true;
+            		}
 			if ($objContent->sliderPaginationType)
 			{
 				$arrParams['paginationType'] = $objContent->sliderPaginationType;
@@ -122,7 +122,7 @@ class WrapperStop extends ContentElement
 			$this->Template->sliderPagination = $objContent->sliderPagination;
 			$this->Template->wrapperClass     = $objContent->sliderWrapperClass;
 			$this->Template->parameters       = $arrParams;
-            $this->Template->sliderId         = 'swiper-' . $objContent->id; // unique name for an entry in the sliderConfig-variable
+            		$this->Template->sliderId         = 'swiper-' . $objContent->id; // unique name for an entry in the sliderConfig-variable
 
 			// add CSS and JS
 			$GLOBALS['TL_CSS'][] = 'bundles/contaoswiper/swiper.min.css';
