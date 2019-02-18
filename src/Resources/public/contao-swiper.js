@@ -1,4 +1,3 @@
-"use strict";
 (function() {
     // check if a sliderConfig was created inside the templates
     if (typeof sliderConfig !== 'undefined') {
