@@ -1,3 +1,4 @@
+"use strict";
 (function() {
     // check if a sliderConfig was created inside the templates
     if (typeof sliderConfig !== 'undefined') {
@@ -11,11 +12,11 @@
             var slider = document.getElementById(sliderId);
             var sliderElement = slider.querySelector('.swiper-container');
             var wrapperElement;
-            // if there is an extra cssClass, try to select the next element inside the container and check if it has this class
+            // if there is an extra cssClass, try to select the element inside the container with this class
             if (cssClass) {
-                wrapperElement = sliderElement.firstElementChild;
+                wrapperElement = sliderElement.querySelector(cssClass);
                 // check if there is an element with this class
-                if (!wrapperElement || !wrapperElement.classList.contains(cssClass)) {
+                if (!wrapperElement) {
                     throw new Error('element with class "' + cssClass + '" not found!');
                 }
                 wrapperElement.classList.add('swiper-wrapper');
