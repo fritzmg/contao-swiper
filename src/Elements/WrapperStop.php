@@ -98,7 +98,7 @@ class WrapperStop extends ContentElement
             		}
 			if ($objContent->sliderPaginationType)
 			{
-				$arrParams['paginationType'] = $objContent->sliderPaginationType;
+				$arrParams['paginationType'] = $objContent->sliderPaginationType === 'progress' ? 'progressbar' : $objContent->sliderPaginationType; // in swiper.js, the pagination-type is called "progressbar"
 			}
 			if ($arrBreakpoints = deserialize($objContent->sliderBreakpoints, true))
 			{
