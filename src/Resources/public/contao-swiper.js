@@ -14,7 +14,7 @@
             var wrapperElement;
             // if there is an extra cssClass, try to select the element inside the container with this class
             if (cssClass) {
-                wrapperElement = sliderElement.querySelector(cssClass);
+                wrapperElement = sliderElement.querySelector('.' + cssClass);
                 // check if there is an element with this class
                 if (!wrapperElement) {
                     throw new Error('element with class "' + cssClass + '" not found!');
