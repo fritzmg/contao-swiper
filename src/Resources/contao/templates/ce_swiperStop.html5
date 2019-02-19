@@ -1,20 +1,17 @@
 
     </div>
     <?php if ($this->sliderPagination): ?>
-      <div class="swiper-pagination"></div>
+      <div class="swiper-pagination swiper-pagination-<?= $this->sliderId ?>"></div>
     <?php endif; ?>
     <?php if ($this->sliderButtons): ?>
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev swiper-prev-<?= $this->sliderId ?>"></div>
+      <div class="swiper-button-next swiper-next-<?= $this->sliderId ?>"></div>
     <?php endif; ?>
   </div>
 
   <script>
-    // check if there is already a config (slider) on the page
-    if (typeof sliderConfig === 'undefined') {
-        var sliderConfig = {};
-    }
-    sliderConfig['<?= $this->sliderId; ?>'] = {'cssclass': '<?= $this->wrapperClass ?>', 'params': <?= json_encode($this->parameters) ?>};
+    var config = {'id': '<?= $this->sliderId ?>', 'cssclass': '<?= $this->wrapperClass ?>', 'params': <?= json_encode($this->parameters) ?>};
+    initSwiper(config); // initialize the slider
   </script>
 
 </div>
