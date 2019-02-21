@@ -1,26 +1,17 @@
 
     </div>
     <?php if ($this->sliderPagination): ?>
-      <div class="swiper-pagination"></div>
+      <div class="swiper-pagination swiper-pagination-<?= $this->sliderId ?>"></div>
     <?php endif; ?>
     <?php if ($this->sliderButtons): ?>
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev swiper-prev-<?= $this->sliderId ?>"></div>
+      <div class="swiper-button-next swiper-next-<?= $this->sliderId ?>"></div>
     <?php endif; ?>
   </div>
 
-  <?php if ($this->parameters): ?>
-    <script>
-      (function($) {
-        <?php if (!$this->wrapperClass): ?>
-          $('<?= $this->container ?> > *').wrapAll($('<div class="swiper-wrapper"></div>'));
-        <?php else: ?>
-          $('<?= $this->container ?> .<?= $this->wrapperClass ?>').addClass('swiper-wrapper');
-        <?php endif; ?>
-        $('<?= $this->container ?> .<?= $this->wrapperClass ?: 'swiper-wrapper' ?> > *').addClass('swiper-slide');
-        $('<?= $this->container ?>').data('swiper', new Swiper('<?= $this->container ?>', <?= json_encode($this->parameters) ?>));
-      })(jQuery);
-    </script>
-  <?php endif; ?>
+  <script>
+    var config = {'id': '<?= $this->sliderId ?>', 'cssclass': '<?= $this->wrapperClass ?>', 'params': <?= json_encode($this->parameters) ?>};
+    initSwiper(config); // initialize the slider
+  </script>
 
 </div>
