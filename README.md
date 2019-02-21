@@ -19,4 +19,4 @@ __jQuery__ does **not** have to be enabled in your page layout.
 | *different slider-effects* | slide, fade, cube, coverflow, flip |
 | *different pagination-types* | bullets, fraction, progressbar |
 | *breakpoints* | change some settings on different viewports |
-| *custom wrapper-class* | Helpful when adding a *module* (e.g. newslist-module) inside the slider. You can define the `mod-newslist`-class as wrapper for the slides, so that it is possible to slide through the single news-entries. |
+| *custom wrapper-class* | Helpful when adding a *module* (e.g. newslist-module) inside the slider. You can define the `mod_newslist`-class as wrapper for the slides, so that it is possible to slide through the single news-entries. |
