@@ -9,8 +9,15 @@
  * file that was distributed with this source code.
  */
 
+namespace ContaoSwiperBundle\Resources\contao\dca;
 
-$GLOBALS['TL_DCA']['tl_content']['palettes']['swiperStart'] = '{type_legend},type;{slider_legend},sliderDelay,sliderSpeed,sliderSlidesPerView,sliderSpaceBetween,sliderEffect,sliderWrapperClass,sliderContinuous,sliderButtons,sliderPagination,sliderPaginationType,sliderBreakpoints;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID;{invisible_legend:hide},invisible,start,stop';
+use Contao\ArticleModel;
+use Contao\ContentModel;
+use Contao\DataContainer;
+use Contao\LayoutModel;
+use Contao\PageModel;
+
+$GLOBALS['TL_DCA']['tl_content']['palettes']['swiperStart'] = '{type_legend},type;{slider_legend},sliderScripts,sliderDelay,sliderSpeed,sliderSlidesPerView,sliderSpaceBetween,sliderEffect,sliderWrapperClass,sliderContinuous,sliderButtons,sliderPagination,sliderPaginationType,sliderBreakpoints;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['swiperStop'] = $GLOBALS['TL_DCA']['tl_content']['palettes']['sliderStop'];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['sliderDelay']['eval']['rgxp'] = 'natural';
@@ -135,3 +142,54 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['sliderBreakpoints'] = array
     ),
     'sql' => 'BLOB null'
 );
+
+$GLOBALS['TL_DCA'][$table]['fields']['sliderScripts'] = [
+	'label' => &$GLOBALS['TL_LANG'][$table]['sliderScripts'],
+	'exclude' => true,
+	'input_field_callback' => [tl_content_swiper::class, 'showScriptStatus'],
+	'sql' => "char(1) NOT NULL default ''"
+];
+
+class tl_content_swiper
+{
+	/**
+	 * @param DataContainer $dc
+	 *
+	 * @return string
+	 */
+	public function showScriptStatus(DataContainer $dc)
+	{
+		// get the content-model of the current record
+		$content = ContentModel::findById((int)$dc->id);
+		if (!$content) {
+			throw new \RuntimeException('something went wrong!');
+		}
+		if ($content->type !== 'swiperStart') {
+			return '';
+		}
+
+		// ptable for swiperStart is "tl_article"
+		// get the article-model for the content-model
+		$article = ArticleModel::findById((int)$content->pid);
+		if (!$article) {
+			throw new \RuntimeException('something went wrong!');
+		}
+		// get the page-model of the article-model
+		$page = PageModel::findById((int)$article->pid);
+
+		// if the page itself has no layout, check for a parent-page
+		while ($page && !$page->includeLayout) {
+			$page = PageModel::findById($page->pid);
+		}
+		if ($page && $page->layout) {
+			$layout = LayoutModel::findById((int)$page->layout);
+			// get the current layout-model of the page
+			if (!$layout) {
+				throw new \RuntimeException('something went wrong!');
+			}
+			$content->sliderScripts = $layout->add_swiper_scripts;
+			$content->save();
+		}
+		return '<div class="widget clr"><h3><label>' . $GLOBALS['TL_LANG']['tl_content']['sliderScripts'][0] . '</label></h3><p class="tl_info">' . $GLOBALS['TL_LANG']['tl_content']['sliderScripts'][$content->sliderScripts ? 2 : 1] . '</p></div>';
+	}
+}

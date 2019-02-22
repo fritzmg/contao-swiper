@@ -124,11 +124,14 @@ class WrapperStop extends ContentElement
 			$this->Template->parameters       = $arrParams;
 			$this->Template->sliderId         = 'swiper-' . $objContent->id; // unique name for an entry in the sliderConfig-variable
 
+			// check if the scripts should be combined
+			$combine = $objContent->sliderScripts ? '|static' : '';
+
 			// add CSS and JS
-			$GLOBALS['TL_CSS'][] = 'bundles/contaoswiper/swiper.min.css';
-			$GLOBALS['TL_CSS'][] = 'bundles/contaoswiper/element.css';
-			$GLOBALS['TL_JAVASCRIPT']['swiper'] = 'bundles/contaoswiper/swiper.min.js'; // load swiper
-			$GLOBALS['TL_JAVASCRIPT']['swiper_init'] = 'bundles/contaoswiper/contao-swiper.min.js'; // load custom script to initialize the sliders
+			$GLOBALS['TL_CSS'][] = 'bundles/contaoswiper/swiper.min.css' . $combine;
+			$GLOBALS['TL_CSS'][] = 'bundles/contaoswiper/element.css' . $combine;
+			$GLOBALS['TL_JAVASCRIPT']['swiper'] = 'bundles/contaoswiper/swiper.min.js' . $combine; // load swiper
+			$GLOBALS['TL_JAVASCRIPT']['swiper_init'] = 'bundles/contaoswiper/contao-swiper.min.js' . $combine; // load custom script to initialize the sliders
 		}
 	}
 }
