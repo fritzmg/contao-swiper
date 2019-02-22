@@ -40,8 +40,7 @@ class tl_layout_swiper
 	 */
 	public function saveSwiperConfig(DataContainer $dc)
 	{
-		//$dc->activeRecord->add_swiper_scripts
-		$pages = PageModel::findByLayout((int)$dc->id);
+		$pages = PageModel::findByLayout((int)$dc->activeRecord->id);
 		if ($pages) {
 			/** @var PageModel $page */
 			foreach ($pages as $page) {
@@ -49,7 +48,7 @@ class tl_layout_swiper
 				$this->updateSwiperConfig((int)$page->id, $dc);
 
 				// update the swiper-config for all the child-pages, that do not have a different layout
-				$subPages = PageModel::findBy(['pid = ?', 'includeLayout != ?'], [(int)$page->id, '"1"']);
+				$subPages = PageModel::findBy(['pid = ?', 'includeLayout = ?'], [(int)$page->id, '']);
 				if ($subPages) {
 					/** @var PageModel $subPage */
 					foreach ($subPages as $subPage) {
@@ -76,7 +75,7 @@ class tl_layout_swiper
 				if ($contents) {
 					/** @var ContentModel $content */
 					foreach ($contents as $content) {
-						$content->sliderScripts = $dc->add_swiper_scripts;
+						$content->sliderScripts = $dc->activeRecord->add_swiper_scripts;
 						$content->save();
 					}
 				}

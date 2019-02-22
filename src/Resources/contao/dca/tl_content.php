@@ -143,8 +143,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['sliderBreakpoints'] = array
     'sql' => 'BLOB null'
 );
 
-$GLOBALS['TL_DCA'][$table]['fields']['sliderScripts'] = [
-	'label' => &$GLOBALS['TL_LANG'][$table]['sliderScripts'],
+$GLOBALS['TL_DCA']['tl_content']['fields']['sliderScripts'] = [
+	'label' => &$GLOBALS['TL_LANG']['tl_content']['sliderScripts'],
 	'exclude' => true,
 	'input_field_callback' => [tl_content_swiper::class, 'showScriptStatus'],
 	'sql' => "char(1) NOT NULL default ''"
@@ -160,7 +160,7 @@ class tl_content_swiper
 	public function showScriptStatus(DataContainer $dc)
 	{
 		// get the content-model of the current record
-		$content = ContentModel::findById((int)$dc->id);
+		$content = ContentModel::findById((int)$dc->activeRecord->id);
 		if (!$content) {
 			throw new \RuntimeException('something went wrong!');
 		}
