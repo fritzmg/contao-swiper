@@ -22,9 +22,3 @@ $GLOBALS['TL_LANG']['tl_content']['sliderBreakpoints'] = ['Breakpoints', 'Defini
 $GLOBALS['TL_LANG']['tl_content']['sliderBreakpointsSettings']['breakpoint'] = ['Breakpoint', 'Der Breakpoint in Pixel.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderBreakpointsSettings']['slidesPerView'] = ['Sichtbare Slides', 'Anzahl der sichtbaren Slides bei diesem Breakpoint.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderBreakpointsSettings']['spaceBetween'] = ['Abstand', 'Abstand zwischen den Slides bei diesem Breakpoint.'];
-
-$GLOBALS['TL_LANG']['tl_content']['sliderScripts'] = [
-	'Swiper-Skripte',
-	'Die Swiper-Skripte werden <strong>nicht</strong> zu den Assets kombiniert.',
-	'Die Swiper-Skripte werden zu den Assets kombiniert.'
-];
