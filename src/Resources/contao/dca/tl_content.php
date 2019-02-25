@@ -136,7 +136,3 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['sliderBreakpoints'] = array
     ),
     'sql' => 'BLOB null'
 );
-
-$GLOBALS['TL_DCA']['tl_content']['fields']['sliderScripts'] = [
-	'sql' => "char(1) NOT NULL default ''"
-];
