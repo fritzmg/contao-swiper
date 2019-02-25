@@ -11,12 +11,7 @@
 
 namespace ContaoSwiperBundle\Resources\contao\dca;
 
-use ContaoSwiperBundle\Helper\DcaHelper;
-
 $table = 'tl_layout';
-
-// adding submit-callback to update the swiper-configurations for all the pages with this layout
-$GLOBALS['TL_DCA'][$table]['config']['onsubmit_callback'][] = [DcaHelper::class, 'saveLayoutSettings'];
 
 $GLOBALS['TL_DCA'][$table]['palettes']['default'] = str_replace('{script_legend}', '{script_legend},add_swiper_scripts', $GLOBALS['TL_DCA'][$table]['palettes']['default']);
 

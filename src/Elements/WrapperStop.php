@@ -11,9 +11,12 @@
 
 namespace ContaoSwiperBundle\Elements;
 
+use Contao\ArticleModel;
 use Contao\BackendTemplate;
 use Contao\ContentElement;
 use Contao\ContentModel;
+use Contao\LayoutModel;
+use Contao\PageModel;
 
 
 /**
@@ -125,7 +128,29 @@ class WrapperStop extends ContentElement
 			$this->Template->sliderId         = 'swiper-' . $objContent->id; // unique name for an entry in the sliderConfig-variable
 
 			// check if the scripts should be combined
-			$combine = $objContent->sliderScripts ? '|static' : '';
+			$combine = '';
+
+			// ptable for swiperStop is "tl_article"
+			// get the article-model for the content-model
+			$article = ArticleModel::findById((int)$objContent->pid);
+			if ($article) {
+				// get the page-model of the article-model
+				$page = PageModel::findById((int)$article->pid);
+
+				// if the page itself has no layout, check for a parent-page
+				while ($page && !$page->includeLayout) {
+					$page = PageModel::findById($page->pid);
+				}
+				if ($page && $page->layout) {
+					$layout = LayoutModel::findById((int)$page->layout);
+					// get the current layout-model of the page
+					if ($layout) {
+						if ($layout->add_swiper_scripts) {
+							$combine = '|static';
+						}
+					}
+				}
+			}
 
 			// add CSS and JS
 			$GLOBALS['TL_CSS'][] = 'bundles/contaoswiper/swiper.min.css' . $combine;
