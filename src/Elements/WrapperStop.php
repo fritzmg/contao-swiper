@@ -130,19 +130,12 @@ class WrapperStop extends ContentElement
 			$combine = '';
 
 			// get the current page
+			/** @var PageModel $objPage */
 			global $objPage;
-			$page = $objPage;
-			// if the page itself has no layout, check for a parent-page
-			while ($page && !$page->includeLayout) {
-				$page = PageModel::findById($page->pid);
-			}
-			if ($page && $page->layout) {
-				$layout = LayoutModel::findById((int)$page->layout);
+			if ($objPage && $objPage->layout) {
 				// get the current layout-model of the page
-				if ($layout) {
-					if ($layout->add_swiper_scripts) {
-						$combine = '|static';
-					}
+				if (null !== ($layout = LayoutModel::findById((int)$objPage->layout)) && $layout->add_swiper_scripts) {
+					$combine = '|static';
 				}
 			}
 
