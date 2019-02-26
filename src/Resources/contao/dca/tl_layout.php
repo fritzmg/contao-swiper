@@ -11,9 +11,13 @@
 
 namespace ContaoSwiperBundle\Resources\contao\dca;
 
+use Contao\CoreBundle\DataContainer\PaletteManipulator;
+
 $table = 'tl_layout';
 
-$GLOBALS['TL_DCA'][$table]['palettes']['default'] = str_replace('{script_legend}', '{script_legend},add_swiper_scripts', $GLOBALS['TL_DCA'][$table]['palettes']['default']);
+PaletteManipulator::create()
+	->addField('add_swiper_scripts', 'scripts', PaletteManipulator::POSITION_BEFORE)
+	->applyToPalette('default', $table);
 
 $GLOBALS['TL_DCA'][$table]['fields']['add_swiper_scripts'] = [
 	'label' => &$GLOBALS['TL_LANG'][$table]['add_swiper_scripts'],

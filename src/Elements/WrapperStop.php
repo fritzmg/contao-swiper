@@ -16,6 +16,7 @@ use Contao\ContentElement;
 use Contao\ContentModel;
 use Contao\LayoutModel;
 use Contao\PageModel;
+use Contao\System;
 
 
 /**
@@ -130,11 +131,21 @@ class WrapperStop extends ContentElement
 			$combine = '';
 
 			// get the current page
-			/** @var PageModel $objPage */
-			global $objPage;
-			if ($objPage && $objPage->layout) {
+			$page = null;
+			$request = System::getContainer()->get('request_stack')->getCurrentRequest();
+			if ($request) {
+				/** @var PageModel $page */
+				$page = $request->attributes->get('pageModel');
+			}
+			// if there is no request or "pageModel" is not part of the request-attributes
+			// use the $GLOBALS['objPage']
+			if ($page === null) {
+				$page = $GLOBALS['objPage'];
+			}
+			// check if the page has a layout
+			if ($page && $page->layout) {
 				// get the current layout-model of the page
-				if (null !== ($layout = LayoutModel::findById((int)$objPage->layout)) && $layout->add_swiper_scripts) {
+				if (null !== ($layout = LayoutModel::findById((int)$page->layout)) && $layout->add_swiper_scripts) {
 					$combine = '|static';
 				}
 			}
