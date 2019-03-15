@@ -27,11 +27,11 @@ use Contao\System;
 class WrapperStop extends ContentElement
 {
 
-	/**
-	 * Template
-	 * @var string
-	 */
-	protected $strTemplate = 'ce_swiperStop';
+    /**
+     * Template
+     * @var string
+     */
+    protected $strTemplate = 'ce_swiperStop';
 
 
     /**
@@ -51,110 +51,119 @@ class WrapperStop extends ContentElement
     }
 
 
-	/**
-	 * Generate the content element
-	 */
-	protected function compile()
-	{
-		$t = ContentModel::getTable();
-		$objContent = ContentModel::findAll([
-			'column' => [
-				"$t.pid = ?",
-				"$t.sorting < ?",
-				"$t.type = ?"
-			],
-			'value' => [
-				$this->pid,
-				$this->sorting,
-				'swiperStart'
-			],
-			'order'  => "$t.sorting DESC",
-			'limit'   => 1,
-			'return' => 'Model'
-		]);
+    /**
+     * Generate the content element
+     */
+    protected function compile()
+    {
+        $t = ContentModel::getTable();
+        $objContent = ContentModel::findAll([
+            'column' => [
+                "$t.pid = ?",
+                "$t.sorting < ?",
+                "$t.type = ?"
+            ],
+            'value' => [
+                $this->pid,
+                $this->sorting,
+                'swiperStart'
+            ],
+            'order'  => "$t.sorting DESC",
+            'limit'   => 1,
+            'return' => 'Model'
+        ]);
 
-		if (null !== $objContent)
-		{
-			// default effect
-			$objContent->sliderEffect = $objContent->sliderEffect ?: 'slide';
+        if (null !== $objContent)
+        {
+            // default effect
+            $objContent->sliderEffect = $objContent->sliderEffect ?: 'slide';
 
-			// prepare parameters for swiper
-			$arrParams = array();
+            // prepare parameters for swiper
+            $arrParams = array();
 
-			// process parameters
-			if ($objContent->sliderDelay) $arrParams['autoplay'] = (int)$objContent->sliderDelay;
-			if ($objContent->sliderSpeed) $arrParams['speed'] = (int)$objContent->sliderSpeed;
-			if ($objContent->sliderSlidesPerView && (is_numeric($objContent->sliderSlidesPerView) || $objContent->sliderSlidesPerView == 'auto'))
-				$arrParams['slidesPerView'] = is_numeric($objContent->sliderSlidesPerView) ? (int)$objContent->sliderSlidesPerView : $objContent->sliderSlidesPerView;
-			if ($objContent->sliderSpaceBetween) $arrParams['spaceBetween'] = (int)$objContent->sliderSpaceBetween;
-			if ($objContent->sliderEffect) $arrParams['effect'] = $objContent->sliderEffect;
-			if ($objContent->sliderContinuous) $arrParams['loop'] = true;
-			if ($objContent->sliderButtons)
-			{
-				// set navigation to true, so it will be enabled
-				$arrParams['navigation'] = true;
-			}
-			if ($objContent->sliderPagination)
-			{
-				// set pagination to true, so it will be enabled
-				$arrParams['pagination'] = true;
-			}
-			if ($objContent->sliderPaginationType)
-			{
-				$arrParams['paginationType'] = $objContent->sliderPaginationType === 'progress' ? 'progressbar' : $objContent->sliderPaginationType; // in swiper.js, the pagination-type is called "progressbar"
-			}
-			if ($arrBreakpoints = deserialize($objContent->sliderBreakpoints, true))
-			{
-				$arrParams['breakpoints'] = array();
-				foreach ($arrBreakpoints as $arrBreakpoint)
-				{
-					$arrSettings = array();
-					if (is_numeric($arrBreakpoint['slidesPerView']) || 'auto' == $arrBreakpoint['slidesPerView'])
-					{
-						$arrSettings['slidesPerView'] = is_numeric($arrBreakpoint['slidesPerView']) ? (int)$arrBreakpoint['slidesPerView'] : 'auto';
-					}
-					if ($arrBreakpoint['spaceBetween'])
-					{
-						$arrSettings['spaceBetween'] = (int)$arrBreakpoint['spaceBetween'];
-					}
-					$arrParams['breakpoints'][(int)$arrBreakpoint['breakpoint']] = $arrSettings;
-				}
-			}
+            // string for swiper id
+            $swiperId = 'swiper-' . $objContent->id;
 
-			$this->Template->sliderButtons    = $objContent->sliderButtons;
-			$this->Template->sliderPagination = $objContent->sliderPagination;
-			$this->Template->wrapperClass     = $objContent->sliderWrapperClass;
-			$this->Template->parameters       = $arrParams;
-			$this->Template->sliderId         = 'swiper-' . $objContent->id; // unique name for an entry in the sliderConfig-variable
+            // process parameters
+            if ($objContent->sliderDelay) $arrParams['autoplay']['delay'] = (int)$objContent->sliderDelay;
+            if ($objContent->sliderSpeed) $arrParams['speed'] = (int)$objContent->sliderSpeed;
+            if ($objContent->sliderSlidesPerView && (is_numeric($objContent->sliderSlidesPerView) || $objContent->sliderSlidesPerView == 'auto'))
+                $arrParams['slidesPerView'] = is_numeric($objContent->sliderSlidesPerView) ? (int)$objContent->sliderSlidesPerView : $objContent->sliderSlidesPerView;
+            if ($objContent->sliderSpaceBetween) $arrParams['spaceBetween'] = (int)$objContent->sliderSpaceBetween;
+            if ($objContent->sliderEffect) $arrParams['effect'] = $objContent->sliderEffect;
+            if ($objContent->sliderContinuous) $arrParams['loop'] = true;
+            if ($objContent->sliderButtons)
+            {
+                $arrParams['navigation'] = [
+                    'nextEl' => '#' . $swiperId . ' .swiper-button-next',
+                    'prevEl' => '#' . $swiperId . ' .swiper-button-prev',
+                ];
+            }
+            if ($objContent->sliderPagination)
+            {
+                $arrParams['pagination'] = [
+                    'el' => '#' . $swiperId . ' .swiper-pagination',
+                    'clickable' => true,
+                ];
 
-			// check if the scripts should be combined
-			$combine = '';
+                if ($objContent->sliderPaginationType)
+                {
+                    // backwards compatibility
+                    $objContent->sliderPaginationType = $objContent->sliderPaginationType === 'progress' ? 'progressbar' : $objContent->sliderPaginationType;
+                    $arrParams['pagination']['type'] = $objContent->sliderPaginationType;
+                }
+            }
+            if ($arrBreakpoints = deserialize($objContent->sliderBreakpoints, true))
+            {
+                $arrParams['breakpoints'] = array();
+                foreach ($arrBreakpoints as $arrBreakpoint)
+                {
+                    $arrSettings = array();
+                    if (is_numeric($arrBreakpoint['slidesPerView']) || 'auto' == $arrBreakpoint['slidesPerView'])
+                    {
+                        $arrSettings['slidesPerView'] = is_numeric($arrBreakpoint['slidesPerView']) ? (int)$arrBreakpoint['slidesPerView'] : 'auto';
+                    }
+                    if ($arrBreakpoint['spaceBetween'])
+                    {
+                        $arrSettings['spaceBetween'] = (int)$arrBreakpoint['spaceBetween'];
+                    }
+                    $arrParams['breakpoints'][(int)$arrBreakpoint['breakpoint']] = $arrSettings;
+                }
+            }
 
-			// get the current page
-			$page = null;
-			$request = System::getContainer()->get('request_stack')->getCurrentRequest();
-			if ($request) {
-				/** @var PageModel $page */
-				$page = $request->attributes->get('pageModel');
-			}
-			// if there is no request or "pageModel" is not part of the request-attributes
-			// use the $GLOBALS['objPage']
-			if ($page === null) {
-				$page = $GLOBALS['objPage'];
-			}
-			// check if the page has a layout
-			if ($page && $page->layout) {
-				// get the current layout-model of the page
-				if (null !== ($layout = LayoutModel::findById((int)$page->layout)) && $layout->add_swiper_scripts) {
-					$combine = '|static';
-				}
-			}
+            $this->Template->sliderButtons    = $objContent->sliderButtons;
+            $this->Template->sliderPagination = $objContent->sliderPagination;
+            $this->Template->wrapperClass     = $objContent->sliderWrapperClass;
+            $this->Template->parameters       = $arrParams;
+            $this->Template->sliderId         = 'swiper-' . $objContent->id; // unique name for an entry in the sliderConfig-variable
 
-			// add CSS and JS
-			$GLOBALS['TL_CSS'][] = 'bundles/contaoswiper/swiper.min.css' . $combine;
-			$GLOBALS['TL_CSS'][] = 'bundles/contaoswiper/element.css' . $combine;
-			$GLOBALS['TL_JAVASCRIPT']['swiper'] = 'bundles/contaoswiper/swiper.min.js' . $combine; // load swiper
-			$GLOBALS['TL_JAVASCRIPT']['swiper_init'] = 'bundles/contaoswiper/contao-swiper.min.js' . $combine; // load custom script to initialize the sliders
-		}
-	}
+            // check if the scripts should be combined
+            $combine = '';
+
+            // get the current page
+            $page = null;
+            $request = System::getContainer()->get('request_stack')->getCurrentRequest();
+            if ($request) {
+                /** @var PageModel $page */
+                $page = $request->attributes->get('pageModel');
+            }
+            // if there is no request or "pageModel" is not part of the request-attributes
+            // use the $GLOBALS['objPage']
+            if ($page === null) {
+                $page = $GLOBALS['objPage'];
+            }
+            // check if the page has a layout
+            if ($page && $page->layout) {
+                // get the current layout-model of the page
+                if (null !== ($layout = LayoutModel::findById((int)$page->layout)) && $layout->add_swiper_scripts) {
+                    $combine = '|static';
+                }
+            }
+
+            // add CSS and JS
+            $GLOBALS['TL_CSS'][] = 'bundles/contaoswiper/swiper.min.css' . $combine;
+            $GLOBALS['TL_JAVASCRIPT']['swiper'] = 'bundles/contaoswiper/swiper.min.js' . $combine; // load swiper
+            $GLOBALS['TL_JAVASCRIPT']['swiper_init'] = 'bundles/contaoswiper/contao-swiper.min.js' . $combine; // load custom script to initialize the sliders
+        }
+    }
 }

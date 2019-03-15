@@ -24,7 +24,7 @@ gulp.task('watch', function(callback) {
 });
 
 gulp.task('watch:js', function() {
-  gulp.watch('files/themes/**/*.js', ['compressJS']);
+  gulp.watch('src/Resources/public/contao-swiper.js', ['compressJS']);
 });
 
 gulp.task('default', function(callback) {

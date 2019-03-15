@@ -1,17 +1,20 @@
 
     </div>
     <?php if ($this->sliderPagination): ?>
-      <div class="swiper-pagination swiper-pagination-<?= $this->sliderId ?>"></div>
+      <div class="swiper-pagination"></div>
     <?php endif; ?>
     <?php if ($this->sliderButtons): ?>
-      <div class="swiper-button-prev swiper-prev-<?= $this->sliderId ?>"></div>
-      <div class="swiper-button-next swiper-next-<?= $this->sliderId ?>"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
     <?php endif; ?>
   </div>
 
   <script>
-    var config = {'id': '<?= $this->sliderId ?>', 'cssclass': '<?= $this->wrapperClass ?>', 'params': <?= json_encode($this->parameters) ?>};
-    initSwiper(config); // initialize the slider
+    initSwiper({
+      id: '<?= $this->sliderId ?>',
+      wrapperClass: '<?= $this->wrapperClass ?>',
+      params: <?= json_encode($this->parameters) ?>
+    });
   </script>
 
 </div>

@@ -91,11 +91,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['sliderPaginationType'] = array
     'exclude' => true,
     'default' => 'bullets',
     'inputType' => 'select',
-    'options' => array(
-        'bullets' => 'Punkte',
-        'fraction' => 'Bruchzahl',
-        'progress' => 'Fortschritt'
-    ),
+    'options' => array('bullets', 'fraction', 'progressbar'),
+    'reference' => &$GLOBALS['TL_LANG']['tl_content']['sliderPaginationTypes'],
     'eval' => array('tl_class'=>'w50'),
     'sql' => "varchar(16) NOT NULL default ''"
 );

@@ -1,60 +1,56 @@
-var initSwiper = function(sliderConfig) {
-    // check if a sliderConfig was created inside the templates
-    if (typeof Swiper !== 'undefined' && typeof sliderConfig !== 'undefined') {
+var initSwiper = function(swiperConfig) {
+    // check if a swiperConfig was created inside the templates
+    if (typeof Swiper !== 'undefined' && typeof swiperConfig !== 'undefined') {
         // get properties for this slider
-        var sliderId = sliderConfig.id;
-        var cssClass = sliderConfig.cssclass;
-        var params = sliderConfig.params;
-        var swiperClass = 'swiper-' + sliderId;
+        var swiperId = swiperConfig.id;
+        var wrapperClass = swiperConfig.wrapperClass;
+        var params = swiperConfig.params;
 
         // adjust html structure
-        var slider = document.getElementById(sliderId);
-        var sliderElement = slider.querySelector('.swiper-container');
-        sliderElement.classList.add(swiperClass);
-        var wrapperElement;
+        var swiperContainer = document.getElementById(swiperId);
+        var wrapperElement = swiperContainer.querySelector('.swiper-wrapper');
+
         // if there is an extra cssClass, try to select the element inside the container with this class
-        if (cssClass) {
-            wrapperElement = sliderElement.querySelector('.' + cssClass);
+        if (wrapperClass) {
+            newWrapperElement = swiperContainer.querySelector('.' + wrapperClass);
             // check if there is an element with this class
-            if (!wrapperElement) {
-                throw new Error('element with class "' + cssClass + '" not found!');
+            if (!newWrapperElement) {
+                throw new Error('Wrapper element with class "' + wrapperClass + '" not found!');
             }
-            wrapperElement.classList.add('swiper-wrapper');
-            // add custom css class
-            //wrapperElement.classList.add(cssClass);
-        } else {
-            sliderElement.innerHTML = '<div class="swiper-wrapper">' + sliderElement.innerHTML + '</div>'; // add the swiper-wrapper element inside the swiper-container
-            wrapperElement = sliderElement.querySelector('.swiper-wrapper');
+            newWrapperElement.classList.add('swiper-wrapper');
+
+            // remove original wrapper element
+            while (wrapperElement.firstChild) {
+                wrapperElement.parentNode.insertBefore(wrapperElement.firstChild, wrapperElement);
+            }
+            wrapperElement.parentNode.removeChild(wrapperElement);
+            wrapperElement = newWrapperElement;
+
+            // check if parent of swiper-wrapper is swiper-container
+            var wrapperParent = wrapperElement.parentNode;
+            if (!wrapperParent.classList.contains('swiper-container')) {
+                // set parent of swiper-wrapper as swiper-container
+                swiperContainer.parentNode.insertBefore(wrapperParent, swiperContainer);
+
+                while (swiperContainer.firstChild) {
+                    wrapperParent.appendChild(swiperContainer.firstChild);
+                }
+                
+                wrapperParent.classList.add('swiper-container');
+                wrapperParent.id = swiperContainer.id;
+
+                swiperContainer.parentNode.removeChild(swiperContainer);
+                swiperContainer = wrapperParent;
+            }
         }
-        // get all Elements inside the wrapper
+
+        // add swiper-slide class to all children
         var slides = wrapperElement.children;
         for (var j = 0; j < slides.length; j++) {
             slides[j].classList.add('swiper-slide');
         }
 
-        // adding pagination
-        if (params.pagination) {
-            params.pagination = {
-                el: '.swiper-pagination-' + sliderId,
-                type: params.paginationType,
-                clickable: true
-            };
-        }
-
-        // adding navigation
-        if (params.navigation) {
-            params.navigation = {
-                nextEl: '.swiper-next-' + sliderId,
-                prevEl: '.swiper-prev-' + sliderId,
-            }
-        }
-
-        // adding lazy.loading
-        params.lazy = {
-            loadPrevNext: true,
-        };
-
         // init slider with given parameters
-        new Swiper(sliderElement, params);
+        new Swiper(swiperContainer, params);
     }
 };

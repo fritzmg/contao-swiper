@@ -22,3 +22,9 @@ $GLOBALS['TL_LANG']['tl_content']['sliderBreakpoints'] = ['Breakpoints', 'Overri
 $GLOBALS['TL_LANG']['tl_content']['sliderBreakpointsSettings']['breakpoint'] = ['Breakpoint', 'The breakpoint in pixels.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderBreakpointsSettings']['slidesPerView'] = ['Slides per view', 'Number of visible slides at this breakpoint.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderBreakpointsSettings']['spaceBetween'] = ['Space between', 'Space between slides at this breakpoint.'];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderPaginationTypes'] = [
+    'bullets' => 'Bullets',
+    'fraction' => 'Fraction',
+    'progressbar' => 'Progress bar',
+];
