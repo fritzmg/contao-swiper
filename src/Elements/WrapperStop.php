@@ -85,7 +85,7 @@ class WrapperStop extends ContentElement
             $swiperId = 'swiper-' . $objContent->id;
 
             // process parameters
-            if ($objContent->sliderDelay) $arrParams['autoplay']['delay'] = (int)$objContent->sliderDelay;
+            if ($objContent->sliderDelay) $arrParams['autoplay'] = ['delay' => (int)$objContent->sliderDelay];
             if ($objContent->sliderSpeed) $arrParams['speed'] = (int)$objContent->sliderSpeed;
             if ($objContent->sliderSlidesPerView && (is_numeric($objContent->sliderSlidesPerView) || $objContent->sliderSlidesPerView == 'auto'))
                 $arrParams['slidesPerView'] = is_numeric($objContent->sliderSlidesPerView) ? (int)$objContent->sliderSlidesPerView : $objContent->sliderSlidesPerView;
