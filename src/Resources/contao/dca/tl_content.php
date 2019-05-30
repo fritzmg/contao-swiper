@@ -50,6 +50,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['sliderEffect'] = array
     'options' => array(
         'slide' => 'Slide',
         'fade' => 'Fade',
+        'crossfade' => 'Crossfade',
         'cube' => 'Cube',
         'coverflow' => 'Coverflow',
         'flip' => 'Flip'

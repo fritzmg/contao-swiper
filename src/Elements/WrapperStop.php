@@ -90,7 +90,12 @@ class WrapperStop extends ContentElement
             if ($objContent->sliderSlidesPerView && (is_numeric($objContent->sliderSlidesPerView) || $objContent->sliderSlidesPerView == 'auto'))
                 $arrParams['slidesPerView'] = is_numeric($objContent->sliderSlidesPerView) ? (int)$objContent->sliderSlidesPerView : $objContent->sliderSlidesPerView;
             if ($objContent->sliderSpaceBetween) $arrParams['spaceBetween'] = (int)$objContent->sliderSpaceBetween;
-            if ($objContent->sliderEffect) $arrParams['effect'] = $objContent->sliderEffect;
+            if ('crossfade' === $objContent->sliderEffect) {
+                $arrParams['effect'] = 'fade';
+                $arrParams['fadeEffect'] = ['crossFade' => true];
+            } elseif ($objContent->sliderEffect) {
+                $arrParams['effect'] = $objContent->sliderEffect;
+            }
             if ($objContent->sliderContinuous) $arrParams['loop'] = true;
             if ($objContent->sliderButtons)
             {
