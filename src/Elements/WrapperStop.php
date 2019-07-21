@@ -138,6 +138,10 @@ class WrapperStop extends ContentElement
 
             if ($objContent->sliderAutoheight) $arrParams['autoHeight'] = true;
 
+            if ($objContent->sliderCenteredSlides) {
+                $arrParams['centeredSlides'] = true;
+            }
+
             $this->Template->sliderButtons    = $objContent->sliderButtons;
             $this->Template->sliderPagination = $objContent->sliderPagination;
             $this->Template->wrapperClass     = $objContent->sliderWrapperClass;

@@ -1,25 +1,24 @@
 {
-	"name":"fritzmg/contao-swiper",
-	"description":"Contao 4+ bundle to integrate Swiper.js",
-	"keywords":["contao", "swiper"],
-	"type":"contao-bundle",
-	"homepage":"http://www.inspiredminds.at",
-	"license":"LGPL-3.0-or-later",
-	"authors":[
+	"name": "fritzmg/contao-swiper",
+	"description": "Contao 4+ bundle to integrate Swiper.js",
+	"keywords": ["contao", "swiper"],
+	"type": "contao-bundle",
+	"license": "LGPL-3.0-or-later",
+	"authors": [
 		{
-			"name":"Fritz Michael Gschwantner",
-			"homepage":"http://www.inspiredminds.at",
-			"email":"fmg@inspiredminds.at",
-			"role":"Developer"
+			"name": "Fritz Michael Gschwantner",
+			"homepage": "http://www.inspiredminds.at",
+			"email": "fmg@inspiredminds.at",
+			"role": "Developer"
 		}
 	],
-	"support":{
-		"email":"fmg@inspiredminds.at",
-		"issues":"https://github.com/fritzmg/contao-swiper/issues",
-		"source":"https://github.com/fritzmg/contao-swiper",
-		"forum":"https://community.contao.org/de"
+	"support": {
+		"email": "fmg@inspiredminds.at",
+		"issues": "https://github.com/fritzmg/contao-swiper/issues",
+		"source": "https://github.com/fritzmg/contao-swiper",
+		"forum": "https://community.contao.org/de"
 	},
-	"require":{
+	"require": {
 		"contao/core-bundle": "~4.4",
 		"menatwork/contao-multicolumnwizard": "^3.3"
 	},

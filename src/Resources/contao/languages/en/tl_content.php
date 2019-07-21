@@ -18,6 +18,7 @@ $GLOBALS['TL_LANG']['tl_content']['sliderButtons'] = ['Prev/next buttons','Shows
 $GLOBALS['TL_LANG']['tl_content']['sliderPagination'] = ['Pagination','Shows a clickable pagination to navigate the slides.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderPaginationType'] = ['Pagination type','The type of the pagination.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderAutoheight'] = ['Auto-height','When active the height of the slider adapts to the height of the currently active element.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderCenteredSlides'] = ['Centered slides', 'When active the current slide will be in the center of the slider rathern than aligned to the left.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderBreakpoints'] = ['Breakpoints', 'Overrides certain parameters at the defined viewport breakpoints.'];
 
 $GLOBALS['TL_LANG']['tl_content']['sliderBreakpointsSettings']['breakpoint'] = ['Breakpoint', 'The breakpoint in pixels.'];
