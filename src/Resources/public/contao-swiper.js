@@ -1,3 +1,4 @@
+var swiperSliders = {};
 var initSwiper = function(swiperConfig) {
     // check if a swiperConfig was created inside the templates
     if (typeof Swiper !== 'undefined' && typeof swiperConfig !== 'undefined') {
@@ -51,6 +52,6 @@ var initSwiper = function(swiperConfig) {
         }
 
         // init slider with given parameters
-        new Swiper(swiperContainer, params);
+        swiperSliders[sliderConfig.id] = new Swiper(swiperContainer, params);
     }
 };
