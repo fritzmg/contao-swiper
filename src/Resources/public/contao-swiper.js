@@ -51,6 +51,6 @@ var initSwiper = function(swiperConfig) {
         }
 
         // init slider with given parameters
-        new Swiper(swiperContainer, params);
+        return new Swiper(swiperContainer, params);
     }
 };
