@@ -172,7 +172,7 @@ class WrapperStop extends ContentElement
             }
 
             // add CSS and JS
-            $GLOBALS['TL_CSS'][] = 'bundles/contaoswiper/swiper.min.css' . $combine;
+            $GLOBALS['TL_CSS']['swiper'] = 'bundles/contaoswiper/swiper.min.css' . $combine;
             $GLOBALS['TL_JAVASCRIPT']['swiper'] = 'bundles/contaoswiper/swiper.min.js' . $combine; // load swiper
             $GLOBALS['TL_JAVASCRIPT']['swiper_init'] = 'bundles/contaoswiper/contao-swiper.min.js' . $combine; // load custom script to initialize the sliders
         }
