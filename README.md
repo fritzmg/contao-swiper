@@ -1,4 +1,4 @@
-[![](https://img.shields.io/maintenance/yes/2019.svg)](https://github.com/fritzmg/contao-swiper)
+[![](https://img.shields.io/maintenance/yes/2020.svg)](https://github.com/fritzmg/contao-swiper)
 [![](https://img.shields.io/packagist/v/fritzmg/contao-swiper.svg)](https://packagist.org/packages/fritzmg/contao-swiper)
 [![](https://img.shields.io/packagist/dt/fritzmg/contao-swiper.svg)](https://packagist.org/packages/fritzmg/contao-swiper)
 
