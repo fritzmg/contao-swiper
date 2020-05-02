@@ -60,13 +60,15 @@ class WrapperStop extends ContentElement
         $objContent = ContentModel::findAll([
             'column' => [
                 "$t.pid = ?",
+                "$t.ptable = ?",
                 "$t.sorting < ?",
-                "$t.type = ?"
+                "$t.type = ?",
             ],
             'value' => [
                 $this->pid,
+                $this->ptable,
                 $this->sorting,
-                'swiperStart'
+                'swiperStart',
             ],
             'order'  => "$t.sorting DESC",
             'limit'   => 1,
