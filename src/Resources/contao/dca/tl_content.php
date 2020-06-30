@@ -10,7 +10,7 @@
  */
 
 
-$GLOBALS['TL_DCA']['tl_content']['palettes']['swiperStart'] = '{type_legend},type;{slider_legend},sliderDelay,sliderSpeed,sliderSlidesPerView,sliderSpaceBetween,sliderEffect,sliderWrapperClass,sliderContinuous,sliderButtons,sliderAutoheight,sliderCenteredSlides,sliderPagination,sliderBreakpoints;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID;{invisible_legend:hide},invisible,start,stop';
+$GLOBALS['TL_DCA']['tl_content']['palettes']['swiperStart'] = '{type_legend},type;{slider_legend},sliderDelay,sliderSpeed,sliderSlidesPerView,sliderSpaceBetween,sliderEffect,sliderWrapperClass,sliderContinuous,sliderButtons,sliderAutoheight,sliderCenteredSlides,sliderPagination,sliderBreakpoints;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,sliderCustomOptions;{invisible_legend:hide},invisible,start,stop';
 
 $GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'sliderPagination';
 
@@ -156,3 +156,11 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['sliderCenteredSlides'] = array
     'eval' => array('tl_class'=>'w50'),
     'sql' => "char(1) NOT NULL default ''"
 );
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['sliderCustomOptions'] = [
+    'label' => &$GLOBALS['TL_LANG']['tl_content']['sliderCustomOptions'],
+    'exclude' => true,
+    'inputType' => 'jsonWidget',
+    'eval' => ['tl_class' => 'clr', 'rte' => 'ace|json', 'decodeEntities' => true, 'allowHtml' => true],
+    'sql'       => "blob NULL",
+];

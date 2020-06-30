@@ -20,6 +20,7 @@
 	},
 	"require": {
 		"contao/core-bundle": "~4.4",
+		"fiedsch/contao-jsonwidget": "^0.4",
 		"menatwork/contao-multicolumnwizard": "^3.3"
 	},
 	"require-dev": {

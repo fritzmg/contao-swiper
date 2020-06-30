@@ -120,21 +120,21 @@ class WrapperStop extends ContentElement
                     $arrParams['pagination']['type'] = $objContent->sliderPaginationType;
                 }
             }
-            if ($arrBreakpoints = deserialize($objContent->sliderBreakpoints, true))
-            {
-                $arrParams['breakpoints'] = array();
-                foreach ($arrBreakpoints as $arrBreakpoint)
-                {
+
+            $arrBreakpoints = deserialize($objContent->sliderBreakpoints, true);
+
+            if (!empty($arrBreakpoints)) {
+                foreach ($arrBreakpoints as $arrBreakpoint) {
                     $arrSettings = array();
-                    if (is_numeric($arrBreakpoint['slidesPerView']) || 'auto' == $arrBreakpoint['slidesPerView'])
-                    {
+                    if (is_numeric($arrBreakpoint['slidesPerView']) || 'auto' == $arrBreakpoint['slidesPerView']) {
                         $arrSettings['slidesPerView'] = is_numeric($arrBreakpoint['slidesPerView']) ? (int)$arrBreakpoint['slidesPerView'] : 'auto';
                     }
-                    if ($arrBreakpoint['spaceBetween'])
-                    {
+                    if ($arrBreakpoint['spaceBetween']) {
                         $arrSettings['spaceBetween'] = (int)$arrBreakpoint['spaceBetween'];
                     }
-                    $arrParams['breakpoints'][(int)$arrBreakpoint['breakpoint']] = $arrSettings;
+                    if (!empty($arrSettings)) {
+                        $arrParams['breakpoints'][(int)$arrBreakpoint['breakpoint']] = $arrSettings;
+                    }
                 }
             }
 
@@ -142,6 +142,11 @@ class WrapperStop extends ContentElement
 
             if ($objContent->sliderCenteredSlides) {
                 $arrParams['centeredSlides'] = true;
+            }
+
+            if ($objContent->sliderCustomOptions && null !== ($customOptions = json_decode($objContent->sliderCustomOptions, true))) {
+                
+                $arrParams = array_merge_recursive($arrParams, $customOptions);dump($arrParams);
             }
 
             $this->Template->sliderButtons    = $objContent->sliderButtons;

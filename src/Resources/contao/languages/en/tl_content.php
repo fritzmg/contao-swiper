@@ -20,6 +20,7 @@ $GLOBALS['TL_LANG']['tl_content']['sliderPaginationType'] = ['Pagination type','
 $GLOBALS['TL_LANG']['tl_content']['sliderAutoheight'] = ['Auto-height','When active the height of the slider adapts to the height of the currently active element.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderCenteredSlides'] = ['Centered slides', 'When active the current slide will be in the center of the slider rathern than aligned to the left.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderBreakpoints'] = ['Breakpoints', 'Overrides certain parameters at the defined viewport breakpoints.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderCustomOptions'] = ['Custom options', 'Custom options for the Swiper instance as JSON.'];
 
 $GLOBALS['TL_LANG']['tl_content']['sliderBreakpointsSettings']['breakpoint'] = ['Breakpoint', 'The breakpoint in pixels.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderBreakpointsSettings']['slidesPerView'] = ['Slides per view', 'Number of visible slides at this breakpoint.'];
