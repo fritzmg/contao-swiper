@@ -146,7 +146,7 @@ class WrapperStop extends ContentElement
 
             if ($objContent->sliderCustomOptions && null !== ($customOptions = json_decode($objContent->sliderCustomOptions, true))) {
                 
-                $arrParams = array_merge_recursive($arrParams, $customOptions);dump($arrParams);
+                $arrParams = array_merge_recursive($arrParams, $customOptions);
             }
 
             $this->Template->sliderButtons    = $objContent->sliderButtons;
