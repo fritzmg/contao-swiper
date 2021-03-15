@@ -87,11 +87,11 @@ class WrapperStop extends ContentElement
             $swiperId = 'swiper-' . $objContent->id;
 
             // process parameters
-            if ($objContent->sliderDelay) $arrParams['autoplay'] = ['delay' => (int)$objContent->sliderDelay];
-            if ($objContent->sliderSpeed) $arrParams['speed'] = (int)$objContent->sliderSpeed;
+            if ($objContent->sliderDelay) $arrParams['autoplay'] = ['delay' => (int) $objContent->sliderDelay];
+            if ($objContent->sliderSpeed) $arrParams['speed'] = (int) $objContent->sliderSpeed;
             if ($objContent->sliderSlidesPerView && (is_numeric($objContent->sliderSlidesPerView) || $objContent->sliderSlidesPerView == 'auto'))
-                $arrParams['slidesPerView'] = is_numeric($objContent->sliderSlidesPerView) ? (float) $objContent->sliderSlidesPerView : $objContent->sliderSlidesPerView;
-            if ($objContent->sliderSpaceBetween) $arrParams['spaceBetween'] = (int)$objContent->sliderSpaceBetween;
+                $arrParams['slidesPerView'] = is_numeric($objContent->sliderSlidesPerView) ? (int) $objContent->sliderSlidesPerView : $objContent->sliderSlidesPerView;
+            if ($objContent->sliderSpaceBetween) $arrParams['spaceBetween'] = (int) $objContent->sliderSpaceBetween;
             if ('crossfade' === $objContent->sliderEffect) {
                 $arrParams['effect'] = 'fade';
                 $arrParams['fadeEffect'] = ['crossFade' => true];
@@ -145,8 +145,7 @@ class WrapperStop extends ContentElement
             }
 
             if ($objContent->sliderCustomOptions && null !== ($customOptions = json_decode($objContent->sliderCustomOptions, true))) {
-                
-                $arrParams = array_merge_recursive($arrParams, $customOptions);
+                $arrParams = array_replace_recursive($arrParams, $customOptions);
             }
 
             $this->Template->sliderButtons    = $objContent->sliderButtons;
