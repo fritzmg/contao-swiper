@@ -67,6 +67,10 @@ class WrapperStart extends ContentElement
 		{
 			$arrClasses[] = 'pagination-'.$this->sliderPaginationType;
 		}
+		if ($this->sliderSlidesPerView)
+		{
+			$arrClasses[] = 'slides-per-view-'.$this->sliderSlidesPerView;
+		}
 
 		// set classes
 		$arrCssID = $this->cssID;
