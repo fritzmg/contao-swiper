@@ -16,6 +16,7 @@ use Contao\ContentElement;
 use Contao\ContentModel;
 use Contao\LayoutModel;
 use Contao\PageModel;
+use Contao\StringUtil;
 use Contao\System;
 
 
@@ -121,7 +122,14 @@ class WrapperStop extends ContentElement
                 }
             }
 
-            $arrBreakpoints = deserialize($objContent->sliderBreakpoints, true);
+            if ($objContent->sliderScrollbar) {
+                $arrParams['scrollbar'] = [
+                    'el' => '#' . $swiperId . ' .swiper-scrollbar',
+                    'draggable' => true,
+                ];
+            }
+
+            $arrBreakpoints = StringUtil::deserialize($objContent->sliderBreakpoints, true);
 
             if (!empty($arrBreakpoints)) {
                 foreach ($arrBreakpoints as $arrBreakpoint) {
@@ -150,6 +158,7 @@ class WrapperStop extends ContentElement
 
             $this->Template->sliderButtons    = $objContent->sliderButtons;
             $this->Template->sliderPagination = $objContent->sliderPagination;
+            $this->Template->sliderScrollbar  = $objContent->sliderScrollbar;
             $this->Template->wrapperClass     = $objContent->sliderWrapperClass;
             $this->Template->parameters       = $arrParams;
             $this->Template->sliderId         = 'swiper-' . $objContent->id; // unique name for an entry in the sliderConfig-variable
@@ -178,8 +187,8 @@ class WrapperStop extends ContentElement
             }
 
             // add CSS and JS
-            $GLOBALS['TL_CSS']['swiper'] = 'bundles/contaoswiper/swiper.min.css' . $combine;
-            $GLOBALS['TL_JAVASCRIPT']['swiper'] = 'bundles/contaoswiper/swiper.min.js' . $combine; // load swiper
+            $GLOBALS['TL_CSS']['swiper'] = 'bundles/contaoswiper/swiper-bundle.min.css' . $combine;
+            $GLOBALS['TL_JAVASCRIPT']['swiper'] = 'bundles/contaoswiper/swiper-bundle.min.js' . $combine; // load swiper
             $GLOBALS['TL_JAVASCRIPT']['swiper_init'] = 'bundles/contaoswiper/contao-swiper.min.js' . $combine; // load custom script to initialize the sliders
         }
     }

@@ -15,6 +15,7 @@ $GLOBALS['TL_LANG']['tl_content']['sliderSpaceBetween'] = ['Abstand zwischen den
 $GLOBALS['TL_LANG']['tl_content']['sliderEffect'] = ['Effekt','Effekt-Art beim Wechsel der Slides.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderWrapperClass'] = ['Wrapper CSS Klasse','Die optionale CSS Klasse des Wrappers. Kann verwendet werden, wenn man z.B. durch eine Nachrichtenliste sliden möchte. Dann muss die Klasse des Listen-Containers angegeben werden (mod_newslist).'];
 $GLOBALS['TL_LANG']['tl_content']['sliderButtons'] = ['Steuerschaltflächen','Zeigt Vor- und Zurück-Schaltflächen an.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderScrollbar'] = ['Scroll-Balken','Zeigt einen Scroll-Balken an.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderPagination'] = ['Nummerierung','Zeigt eine klickbare Nummerierung für die einzelnen Slides an.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderPaginationType'] = ['Art der Nummerierung','Die Art der Nummerierung.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderAutoheight'] = ['Automatische Höhe','Wenn aktiv, passt sich die Höhe des Sliders an die Höhe des aktuell aktiven Elements an.'];

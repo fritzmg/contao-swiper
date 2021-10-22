@@ -10,7 +10,7 @@
  */
 
 
-$GLOBALS['TL_DCA']['tl_content']['palettes']['swiperStart'] = '{type_legend},type;{slider_legend},sliderDelay,sliderSpeed,sliderSlidesPerView,sliderSpaceBetween,sliderEffect,sliderWrapperClass,sliderContinuous,sliderButtons,sliderAutoheight,sliderCenteredSlides,sliderPagination,sliderBreakpoints;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,sliderCustomOptions;{invisible_legend:hide},invisible,start,stop';
+$GLOBALS['TL_DCA']['tl_content']['palettes']['swiperStart'] = '{type_legend},type;{slider_legend},sliderDelay,sliderSpeed,sliderSlidesPerView,sliderSpaceBetween,sliderEffect,sliderWrapperClass,sliderContinuous,sliderButtons,sliderAutoheight,sliderCenteredSlides,sliderScrollbar,sliderPagination,sliderBreakpoints;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,sliderCustomOptions;{invisible_legend:hide},invisible,start,stop';
 
 $GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'sliderPagination';
 
@@ -76,6 +76,15 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['sliderWrapperClass'] = array
 $GLOBALS['TL_DCA']['tl_content']['fields']['sliderButtons'] = array
 (
     'label' => &$GLOBALS['TL_LANG']['tl_content']['sliderButtons'],
+    'exclude' => true,
+    'inputType' => 'checkbox',
+    'eval' => array('tl_class'=>'w50'),
+    'sql' => "char(1) NOT NULL default ''"
+);
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['sliderScrollbar'] = array
+(
+    'label' => &$GLOBALS['TL_LANG']['tl_content']['sliderScrollbar'],
     'exclude' => true,
     'inputType' => 'checkbox',
     'eval' => array('tl_class'=>'w50'),

@@ -7,6 +7,9 @@
       <div class="swiper-button-prev"></div>
       <div class="swiper-button-next"></div>
     <?php endif; ?>
+    <?php if ($this->sliderScrollbar): ?>
+      <div class="swiper-scrollbar"></div>
+    <?php endif; ?>
   </div>
 
   <script>
