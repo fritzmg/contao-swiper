@@ -42,8 +42,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['sliderSpaceBetween'] = array
     'exclude' => true,
     'default' => 0,
     'inputType' => 'text',
-    'eval' => array('rgxp'=>'natural', 'maxlength'=>5, 'tl_class'=>'w50'),
-    'sql' => "int(10) unsigned NOT NULL default '0'"
+    'eval' => array('rgxp'=>'digit', 'maxlength'=>5, 'tl_class'=>'w50'),
+    'sql' => ['type' => 'integer', 'unsigned' => false, 'default' => 0],
 );
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['sliderEffect'] = array
@@ -141,7 +141,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['sliderBreakpoints'] = array
                 'label'         => &$GLOBALS['TL_LANG']['tl_content']['sliderBreakpointsSettings']['spaceBetween'],
                 'exclude'       => true,
                 'inputType'     => 'text',
-                'eval'          => array('rgxp'=>'natural')
+                'eval'          => array('rgxp'=>'digit')
             ),
         )
     ),
