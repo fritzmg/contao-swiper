@@ -1,23 +1,27 @@
 
     </div>
-    <?php if ($this->sliderPagination): ?>
-      <div class="swiper-pagination"></div>
-    <?php endif; ?>
-    <?php if ($this->sliderButtons): ?>
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
-    <?php endif; ?>
-    <?php if ($this->sliderScrollbar): ?>
-      <div class="swiper-scrollbar"></div>
-    <?php endif; ?>
+    <?php $this->block('controls'); ?>
+      <?php if ($this->sliderPagination): ?>
+        <div class="swiper-pagination"></div>
+      <?php endif; ?>
+      <?php if ($this->sliderButtons): ?>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      <?php endif; ?>
+      <?php if ($this->sliderScrollbar): ?>
+        <div class="swiper-scrollbar"></div>
+      <?php endif; ?>
+    <?php $this->endblock(); ?>
   </div>
 
-  <script>
-    initSwiper({
-      id: '<?= $this->sliderId ?>',
-      wrapperClass: '<?= $this->wrapperClass ?>',
-      params: <?= json_encode($this->parameters) ?>
-    });
-  </script>
+  <?php $this->block('script'); ?>
+    <script>
+      initSwiper({
+        id: '<?= $this->sliderId ?>',
+        wrapperClass: '<?= $this->wrapperClass ?>',
+        params: <?= json_encode($this->parameters) ?>
+      });
+    </script>
+  <?php $this->endblock(); ?>
 
 </div>
