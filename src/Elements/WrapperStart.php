@@ -13,6 +13,7 @@ namespace ContaoSwiperBundle\Elements;
 
 use Contao\BackendTemplate;
 use Contao\ContentElement;
+use Contao\System;
 
 
 /**
@@ -54,23 +55,7 @@ class WrapperStart extends ContentElement
 	{
 		// additional css classes
 		$arrClasses = explode(' ', $this->cssID[1]);
-
-		if ($this->sliderButtons)
-		{
-			$arrClasses[] = 'has-buttons';
-		}
-		if ($this->sliderPagination)
-		{
-			$arrClasses[] = 'has-pagination';
-		}
-		if ($this->sliderPaginationType)
-		{
-			$arrClasses[] = 'pagination-'.$this->sliderPaginationType;
-		}
-		if ($this->sliderSlidesPerView)
-		{
-			$arrClasses[] = 'slides-per-view-'.$this->sliderSlidesPerView;
-		}
+        System::getContainer()->get('fritzmg.contao_swiper.renderer')->addCssClasses($this, $arrClasses);
 
 		// set classes
 		$arrCssID = $this->cssID;
