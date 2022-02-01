@@ -14,8 +14,6 @@ namespace ContaoSwiperBundle\Elements;
 use Contao\BackendTemplate;
 use Contao\ContentElement;
 use Contao\ContentModel;
-use Contao\LayoutModel;
-use Contao\PageModel;
 use Contao\StringUtil;
 use Contao\System;
 
@@ -163,33 +161,7 @@ class WrapperStop extends ContentElement
             $this->Template->parameters       = $arrParams;
             $this->Template->sliderId         = 'swiper-' . $objContent->id; // unique name for an entry in the sliderConfig-variable
 
-            // check if the scripts should be combined
-            $combine = '';
-
-            // get the current page
-            $page = null;
-            $request = System::getContainer()->get('request_stack')->getCurrentRequest();
-            if ($request) {
-                /** @var PageModel $page */
-                $page = $request->attributes->get('pageModel');
-            }
-            // if there is no request or "pageModel" is not part of the request-attributes
-            // use the $GLOBALS['objPage']
-            if ($page === null) {
-                $page = $GLOBALS['objPage'];
-            }
-            // check if the page has a layout
-            if ($page && $page->layout) {
-                // get the current layout-model of the page
-                if (null !== ($layout = LayoutModel::findById((int)$page->layout)) && $layout->add_swiper_scripts) {
-                    $combine = '|static';
-                }
-            }
-
-            // add CSS and JS
-            $GLOBALS['TL_CSS']['swiper'] = 'bundles/contaoswiper/swiper-bundle.min.css' . $combine;
-            $GLOBALS['TL_JAVASCRIPT']['swiper'] = 'bundles/contaoswiper/swiper-bundle.min.js' . $combine; // load swiper
-            $GLOBALS['TL_JAVASCRIPT']['swiper_init'] = 'bundles/contaoswiper/contao-swiper.min.js' . $combine; // load custom script to initialize the sliders
+            System::getContainer()->get('fritzmg.contao_swiper.assets_frontend')->addAssets();
         }
     }
 }

@@ -1,0 +1,10 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  ContaoSwiperBundle\Frontend\AssetsFrontend:
+
+  fritzmg.contao_swiper.assets_frontend:
+    alias: ContaoSwiperBundle\Frontend\AssetsFrontend
+    public: true
