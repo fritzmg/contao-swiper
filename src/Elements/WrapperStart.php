@@ -52,7 +52,7 @@ class WrapperStart extends ContentElement
 	{
 		// additional css classes
 		$arrClasses = explode(' ', $this->cssID[1]);
-        System::getContainer()->get('fritzmg.contao_swiper.renderer')->addCssClasses($this, $arrClasses);
+		System::getContainer()->get('fritzmg.contao_swiper.renderer')->addCssClasses($this, $arrClasses);
 
 		// set classes
 		$arrCssID = $this->cssID;

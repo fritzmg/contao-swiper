@@ -16,6 +16,7 @@ namespace ContaoSwiperBundle\Renderer;
 use Contao\ContentElement;
 use Contao\ContentModel;
 use Contao\LayoutModel;
+use Contao\Model;
 use Contao\PageModel;
 use Contao\StringUtil;
 use Contao\Template;
@@ -36,7 +37,7 @@ class SwiperRenderer
     /**
      * @param ContentModel|ContentElement $model
      */
-    public function addCssClasses($model, array $classes): array
+    public function addCssClasses(Model $model, array $classes): array
     {
         if ($model->sliderButtons) {
             $classes[] = 'has-buttons';
@@ -57,13 +58,13 @@ class SwiperRenderer
         return $classes;
     }
 
-    public function addParamsToTemplate(Template $template, ContentModel $model): void
+    /**
+     * @param ContentModel $model
+     */
+    public function addParamsToTemplate(Template $template, Model $model, $params = []): void
     {
         // default effect
         $model->sliderEffect = $model->sliderEffect ?: 'slide';
-
-        // prepare parameters for swiper
-        $params = [];
 
         // string for swiper id
         $swiperId = 'swiper-'.$model->id;
@@ -123,25 +124,7 @@ class SwiperRenderer
             ];
         }
 
-        $breakpoints = StringUtil::deserialize($model->sliderBreakpoints, true);
-
-        if (!empty($breakpoints)) {
-            foreach ($breakpoints as $breakpoint) {
-                $settings = [];
-
-                if (is_numeric($breakpoint['slidesPerView']) || 'auto' === $breakpoint['slidesPerView']) {
-                    $settings['slidesPerView'] = is_numeric($breakpoint['slidesPerView']) ? (int) $breakpoint['slidesPerView'] : 'auto';
-                }
-
-                if ($breakpoint['spaceBetween']) {
-                    $settings['spaceBetween'] = (int) $breakpoint['spaceBetween'];
-                }
-
-                if (!empty($settings)) {
-                    $params['breakpoints'][(int) $breakpoint['breakpoint']] = $settings;
-                }
-            }
-        }
+        $params = $this->addBreakpointsToParams($model, $params);
 
         if ($model->sliderAutoheight) {
             $params['autoHeight'] = true;
@@ -193,5 +176,30 @@ class SwiperRenderer
         $GLOBALS['TL_CSS']['swiper'] = 'bundles/contaoswiper/swiper-bundle.min.css'.$combine;
         $GLOBALS['TL_JAVASCRIPT']['swiper'] = 'bundles/contaoswiper/swiper-bundle.min.js'.$combine; // load swiper
         $GLOBALS['TL_JAVASCRIPT']['swiper_init'] = 'bundles/contaoswiper/contao-swiper.min.js'.$combine; // load custom script to initialize the sliders
+    }
+
+    protected function addBreakpointsToParams(Model $model, array $params): array
+    {
+        $breakpoints = StringUtil::deserialize($model->sliderBreakpoints, true);
+
+        if (!empty($breakpoints)) {
+            foreach ($breakpoints as $breakpoint) {
+                $settings = [];
+
+                if (is_numeric($breakpoint['slidesPerView']) || 'auto' === $breakpoint['slidesPerView']) {
+                    $settings['slidesPerView'] = is_numeric($breakpoint['slidesPerView']) ? (int) $breakpoint['slidesPerView'] : 'auto';
+                }
+
+                if ($breakpoint['spaceBetween']) {
+                    $settings['spaceBetween'] = (int) $breakpoint['spaceBetween'];
+                }
+
+                if (!empty($settings)) {
+                    $params['breakpoints'][(int) $breakpoint['breakpoint']] = $settings;
+                }
+            }
+        }
+
+        return $params;
     }
 }
