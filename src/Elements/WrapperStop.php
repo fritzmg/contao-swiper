@@ -14,7 +14,6 @@ namespace ContaoSwiperBundle\Elements;
 use Contao\BackendTemplate;
 use Contao\ContentElement;
 use Contao\ContentModel;
-use Contao\StringUtil;
 use Contao\System;
 
 
@@ -35,15 +34,12 @@ class WrapperStop extends ContentElement
 
     /**
      * Display a wildcard in the back end.
-     *
-     * @return string
      */
-    public function generate()
+    public function generate(): string
     {
-        if (TL_MODE == 'BE')
+        if (TL_MODE === 'BE')
         {
-            $objTemplate = new BackendTemplate('be_wildcard');
-            return $objTemplate->parse();
+            return (new BackendTemplate('be_wildcard'))->parse();
         }
 
         return parent::generate();
@@ -53,7 +49,7 @@ class WrapperStop extends ContentElement
     /**
      * Generate the content element
      */
-    protected function compile()
+    protected function compile(): void
     {
         $t = ContentModel::getTable();
         $objContent = ContentModel::findAll([

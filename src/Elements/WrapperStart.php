@@ -33,15 +33,12 @@ class WrapperStart extends ContentElement
 
     /**
      * Display a wildcard in the back end.
-     *
-     * @return string
      */
-    public function generate()
+    public function generate(): string
     {
-        if (TL_MODE == 'BE')
+        if (TL_MODE === 'BE')
         {
-            $objTemplate = new BackendTemplate('be_wildcard');
-            return $objTemplate->parse();
+            return (new BackendTemplate('be_wildcard'))->parse();
         }
 
         return parent::generate();
@@ -51,7 +48,7 @@ class WrapperStart extends ContentElement
 	/**
 	 * Generate the content element
 	 */
-	protected function compile()
+	protected function compile(): void
 	{
 		// additional css classes
 		$arrClasses = explode(' ', $this->cssID[1]);

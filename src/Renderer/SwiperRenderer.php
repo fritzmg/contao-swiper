@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /*
  * This file is part of the ContaoSwiper Bundle.
@@ -34,11 +35,8 @@ class SwiperRenderer
 
     /**
      * @param ContentModel|ContentElement $model
-     * @param array                       $classes
-     *
-     * @return array
      */
-    public function addCssClasses($model, $classes)
+    public function addCssClasses($model, array $classes): array
     {
         if ($model->sliderButtons) {
             $classes[] = 'has-buttons';
@@ -59,13 +57,7 @@ class SwiperRenderer
         return $classes;
     }
 
-    /**
-     * @param Template     $template
-     * @param ContentModel $model
-     *
-     * @return void
-     */
-    public function addParamsToTemplate($template, $model)
+    public function addParamsToTemplate(Template $template, ContentModel $model): void
     {
         // default effect
         $model->sliderEffect = $model->sliderEffect ?: 'slide';
@@ -171,10 +163,7 @@ class SwiperRenderer
         $template->sliderId = 'swiper-'.$model->id; // unique name for an entry in the sliderConfig-variable
     }
 
-    /**
-     * @return void
-     */
-    public function addAssets()
+    public function addAssets(): void
     {
         // check if the scripts should be combined
         $combine = '';
