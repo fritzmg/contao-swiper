@@ -37,7 +37,7 @@ class SwiperRenderer
     /**
      * @param ContentModel|ContentElement $model
      */
-    public function addCssClasses(Model $model, array $classes): array
+    public function addCssClasses($model, array $classes): array
     {
         if ($model->sliderButtons) {
             $classes[] = 'has-buttons';
