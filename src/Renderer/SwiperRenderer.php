@@ -143,7 +143,7 @@ class SwiperRenderer
         $template->sliderScrollbar = $model->sliderScrollbar;
         $template->wrapperClass = $model->sliderWrapperClass;
         $template->parameters = $params;
-        $template->sliderId = 'swiper-'.$model->id; // unique name for an entry in the sliderConfig-variable
+        $template->sliderId = $swiperId; // unique name for an entry in the sliderConfig-variable
     }
 
     public function addAssets(): void
