@@ -161,7 +161,7 @@ class SwiperRenderer
         }
         // if there is no request or "pageModel" is not part of the request-attributes
         // use the $GLOBALS['objPage']
-        if (null === $page) {
+        if (!$page instanceof PageModel) {
             $page = $GLOBALS['objPage'];
         }
         // check if the page has a layout
