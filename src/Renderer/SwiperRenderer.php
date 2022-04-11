@@ -15,6 +15,7 @@ namespace ContaoSwiperBundle\Renderer;
 
 use Contao\ContentElement;
 use Contao\ContentModel;
+use Contao\CoreBundle\Framework\ContaoFramework;
 use Contao\LayoutModel;
 use Contao\Model;
 use Contao\PageModel;
@@ -29,9 +30,15 @@ class SwiperRenderer
      */
     private $requestStack;
 
-    public function __construct(RequestStack $requestStack)
+    /**
+     * @var ContaoFramework
+     */
+    private $framework;
+
+    public function __construct(RequestStack $requestStack, ContaoFramework $framework)
     {
         $this->requestStack = $requestStack;
+        $this->framework = $framework;
     }
 
     /**
@@ -151,23 +158,10 @@ class SwiperRenderer
         // check if the scripts should be combined
         $combine = '';
 
-        // get the current page
-        $page = null;
-        $request = $this->requestStack->getCurrentRequest();
-
-        if ($request) {
-            /** @var PageModel $page */
-            $page = $request->attributes->get('pageModel');
-        }
-        // if there is no request or "pageModel" is not part of the request-attributes
-        // use the $GLOBALS['objPage']
-        if (!$page instanceof PageModel) {
-            $page = $GLOBALS['objPage'];
-        }
         // check if the page has a layout
-        if ($page && $page->layout) {
+        if (null !== ($pageModel = $this->getPageModel()) && $pageModel->layout) {
             // get the current layout-model of the page
-            if (null !== ($layout = LayoutModel::findById((int) $page->layout)) && $layout->add_swiper_scripts) {
+            if (null !== ($layout = $this->framework->getAdapter(LayoutModel::class)->findById((int) $pageModel->layout)) && $layout->add_swiper_scripts) {
                 $combine = '|static';
             }
         }
@@ -176,6 +170,33 @@ class SwiperRenderer
         $GLOBALS['TL_CSS']['swiper'] = 'bundles/contaoswiper/swiper-bundle.min.css'.$combine;
         $GLOBALS['TL_JAVASCRIPT']['swiper'] = 'bundles/contaoswiper/swiper-bundle.min.js'.$combine; // load swiper
         $GLOBALS['TL_JAVASCRIPT']['swiper_init'] = 'bundles/contaoswiper/contao-swiper.min.js'.$combine; // load custom script to initialize the sliders
+    }
+
+    protected function getPageModel(): ?PageModel
+    {
+        $request = $this->requestStack->getCurrentRequest();
+
+        if (null === $request || !$request->attributes->has('pageModel')) {
+            return null;
+        }
+
+        $pageModel = $request->attributes->get('pageModel');
+
+        if ($pageModel instanceof PageModel) {
+            return $pageModel;
+        }
+
+        if (
+            isset($GLOBALS['objPage'])
+            && $GLOBALS['objPage'] instanceof PageModel
+            && (int) $GLOBALS['objPage']->id === (int) $pageModel
+        ) {
+            return $GLOBALS['objPage'];
+        }
+
+        $this->framework->initialize();
+
+        return $this->framework->getAdapter(PageModel::class)->findByPk((int) $pageModel);
     }
 
     protected function addBreakpointsToParams(Model $model, array $params): array
