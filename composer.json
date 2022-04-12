@@ -19,9 +19,14 @@
 		"forum": "https://community.contao.org/de"
 	},
 	"require": {
-		"contao/core-bundle": "~4.4",
+		"php": "^7.2 || ^8.0",
+		"contao/core-bundle": "^4.9",
 		"fiedsch/contao-jsonwidget": "^0.4",
-		"menatwork/contao-multicolumnwizard": "^3.3"
+		"menatwork/contao-multicolumnwizard": "^3.3",
+		"symfony/config": "^4.4 || ^5.2",
+		"symfony/dependency-injection": "^4.4 || ^5.2",
+		"symfony/http-foundation": "^4.4 || ^5.2",
+		"symfony/http-kernel": "^4.4 || ^5.2"
 	},
 	"require-dev": {
 		 "contao/manager-plugin": "^2.0"

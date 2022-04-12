@@ -1,0 +1,10 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  ContaoSwiperBundle\Renderer\SwiperRenderer:
+
+  fritzmg.contao_swiper.renderer:
+    alias: ContaoSwiperBundle\Renderer\SwiperRenderer
+    public: true

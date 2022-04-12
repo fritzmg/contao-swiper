@@ -13,6 +13,7 @@ namespace ContaoSwiperBundle\Elements;
 
 use Contao\BackendTemplate;
 use Contao\ContentElement;
+use Contao\System;
 
 
 /**
@@ -32,15 +33,12 @@ class WrapperStart extends ContentElement
 
     /**
      * Display a wildcard in the back end.
-     *
-     * @return string
      */
-    public function generate()
+    public function generate(): string
     {
-        if (TL_MODE == 'BE')
+        if (TL_MODE === 'BE')
         {
-            $objTemplate = new BackendTemplate('be_wildcard');
-            return $objTemplate->parse();
+            return (new BackendTemplate('be_wildcard'))->parse();
         }
 
         return parent::generate();
@@ -50,27 +48,11 @@ class WrapperStart extends ContentElement
 	/**
 	 * Generate the content element
 	 */
-	protected function compile()
+	protected function compile(): void
 	{
 		// additional css classes
 		$arrClasses = explode(' ', $this->cssID[1]);
-
-		if ($this->sliderButtons)
-		{
-			$arrClasses[] = 'has-buttons';
-		}
-		if ($this->sliderPagination)
-		{
-			$arrClasses[] = 'has-pagination';
-		}
-		if ($this->sliderPaginationType)
-		{
-			$arrClasses[] = 'pagination-'.$this->sliderPaginationType;
-		}
-		if ($this->sliderSlidesPerView)
-		{
-			$arrClasses[] = 'slides-per-view-'.$this->sliderSlidesPerView;
-		}
+		System::getContainer()->get('fritzmg.contao_swiper.renderer')->addCssClasses($this, $arrClasses);
 
 		// set classes
 		$arrCssID = $this->cssID;
