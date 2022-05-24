@@ -15,6 +15,7 @@ use Contao\BackendTemplate;
 use Contao\ContentElement;
 use Contao\ContentModel;
 use Contao\System;
+use ContaoSwiperBundle\Renderer\SwiperRenderer;
 
 
 /**
@@ -71,6 +72,7 @@ class WrapperStop extends ContentElement
         ]);
 
         if (null !== $objContent) {
+            /** @var SwiperRenderer $swiperRenderer */
             $swiperRenderer = System::getContainer()->get('fritzmg.contao_swiper.renderer');
             $swiperRenderer->addParamsToTemplate($this->Template, $objContent);
             $swiperRenderer->addAssets();
