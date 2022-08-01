@@ -1,27 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 /*
- * This file is part of the ContaoSwiper Bundle.
+ * This file is part of the Contao Swiper Bundle.
  *
- * (c) Fritz Michael Gschwantner <https://github.com/fritzmg>
+ * (c) inspiredminds
  *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * @license LGPL-3.0-or-later
  */
 
 namespace ContaoSwiperBundle\ContaoManager;
 
-use ContaoSwiperBundle\ContaoSwiperBundle;
 use Contao\CoreBundle\ContaoCoreBundle;
 use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
-
+use ContaoSwiperBundle\ContaoSwiperBundle;
 
 /**
  * Plugin for the Contao Manager.
- *
- * @author Fritz Michael Gschwantner <fmg@inspiredminds.at>
  */
 class Plugin implements BundlePluginInterface
 {
@@ -32,7 +30,7 @@ class Plugin implements BundlePluginInterface
     {
         return [
             BundleConfig::create(ContaoSwiperBundle::class)
-                ->setLoadAfter([ContaoCoreBundle::class])
+                ->setLoadAfter([ContaoCoreBundle::class]),
         ];
     }
 }

@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 /*
- * This file is part of the ContaoSwiper Bundle.
+ * This file is part of the Contao Swiper Bundle.
  *
- * (c) Fritz Michael Gschwantner <https://github.com/fritzmg>
+ * (c) inspiredminds
  *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * @license LGPL-3.0-or-later
  */
 
 namespace ContaoSwiperBundle\Elements;
@@ -17,40 +18,34 @@ use Contao\ContentModel;
 use Contao\System;
 use ContaoSwiperBundle\Renderer\SwiperRenderer;
 
-
 /**
  * Front end content element "swiper" (wrapper stop).
- *
- * @author Fritz Michael Gschwantner <fmg@inspiredminds.at>
  */
 class WrapperStop extends ContentElement
 {
-
     /**
-     * Template
+     * Template.
+     *
      * @var string
      */
     protected $strTemplate = 'ce_swiperStop';
-
 
     /**
      * Display a wildcard in the back end.
      */
     public function generate(): string
     {
-		$request = System::getContainer()->get('request_stack')->getCurrentRequest();
+        $request = System::getContainer()->get('request_stack')->getCurrentRequest();
 
-        if ($request && System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest($request))
-        {
+        if ($request && System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest($request)) {
             return (new BackendTemplate('be_wildcard'))->parse();
         }
 
         return parent::generate();
     }
 
-
     /**
-     * Generate the content element
+     * Generate the content element.
      */
     protected function compile(): void
     {
@@ -68,9 +63,9 @@ class WrapperStop extends ContentElement
                 $this->sorting,
                 'swiperStart',
             ],
-            'order'  => "$t.sorting DESC",
-            'limit'   => 1,
-            'return' => 'Model'
+            'order' => "$t.sorting DESC",
+            'limit' => 1,
+            'return' => 'Model',
         ]);
 
         if (null !== $objContent) {
