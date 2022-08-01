@@ -38,7 +38,9 @@ class WrapperStop extends ContentElement
      */
     public function generate(): string
     {
-        if (TL_MODE === 'BE')
+		$request = System::getContainer()->get('request_stack')->getCurrentRequest();
+
+        if ($request && System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest($request))
         {
             return (new BackendTemplate('be_wildcard'))->parse();
         }
