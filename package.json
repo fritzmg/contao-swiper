@@ -4,6 +4,6 @@
     "gulp-plumber": "^1.2.0",
     "gulp-rename": "^1.4.0",
     "gulp-uglify": "^3.0.1",
-    "minimatch": ">=3.0.2"
+    "minimatch": ">=3.0.5"
   }
 }
