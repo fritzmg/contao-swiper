@@ -80,9 +80,7 @@ class SwiperRenderer
             $params['autoplay'] = ['delay' => (int) $model->sliderDelay];
         }
 
-        if ($model->sliderSpeed) {
-            $params['speed'] = (int) $model->sliderSpeed;
-        }
+        $params['speed'] = (int) $model->sliderSpeed;
 
         if ($model->sliderSlidesPerView && (is_numeric($model->sliderSlidesPerView) || 'auto' === $model->sliderSlidesPerView)) {
             $params['slidesPerView'] = is_numeric($model->sliderSlidesPerView) ? (int) $model->sliderSlidesPerView : $model->sliderSlidesPerView;
