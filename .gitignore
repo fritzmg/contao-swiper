@@ -3,3 +3,4 @@ Thumbs.db
 /composer.lock
 /vendor/
 /.php_cs.cache
+node_modules/
