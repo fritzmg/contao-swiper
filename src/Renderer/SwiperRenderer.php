@@ -169,6 +169,11 @@ class SwiperRenderer
         $GLOBALS['TL_JAVASCRIPT']['swiper_init'] = 'bundles/contaoswiper/contao-swiper.min.js'.$combine; // load custom script to initialize the sliders
     }
 
+    public function removeAssets(): void
+    {
+        unset($GLOBALS['TL_CSS']['swiper'], $GLOBALS['TL_JAVASCRIPT']['swiper'], $GLOBALS['TL_JAVASCRIPT']['swiper_init']);
+    }
+
     protected function getPageModel(): ?PageModel
     {
         $request = $this->requestStack->getCurrentRequest();
